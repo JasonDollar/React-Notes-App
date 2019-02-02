@@ -1,28 +1,43 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import uuid from 'uuid'
+import classNames from 'classnames'
+
 import * as actions from '../../store/actions'
 import NotesListItem from './NotesListItem/NotesListItem'
+import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 
-import classes from './NotesList.module.css'
+import classes from './NotesList.module.scss'
 
-
-
-
-class NotesList extends Component {
-  // componentDidMount = () => {
-  //   this.props.setNotes()
-  // }
+const NotesList = ({notes, toggleNoteList, showNoteList}) => {
+  const containerClasses = classNames({
+    [classes.NotesList]: true,
+    [classes.active]: showNoteList,
+  })
   
-  render() {
-    const {notes} = this.props
-    return (
-      <div className={classes.NotesList}>
-      {notes.map(item => <NotesListItem note={item} key={item.id}/>)}
+  return (
+    <div className={containerClasses}>
+      <NotesMenuActions />
+      <ul className={classes.notesList}>
+        {notes.map(item => <NotesListItem note={item} key={item.id} toggleNoteList={toggleNoteList}/>)}
+      </ul>
     </div>
-    )
-  }
+  )
 }
+
+
+// class NotesList extends Component {
+//   // componentDidMount = () => {
+//   //   this.props.setNotes()
+//   // }
+  
+//   render() {
+//     const {notes} = this.props
+//     return (
+      
+//     )
+//   }
+// }
 const mapStateToProps = state => ({
   notes: state.notes
 })

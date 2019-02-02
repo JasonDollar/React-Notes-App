@@ -1,0 +1,11 @@
+.main {
+  margin: 0 1rem;
+}
+
+.onlyMobile {
+  display: block;
+  @media (min-width: 766px) {
+    display: none;
+  }
+}
+
