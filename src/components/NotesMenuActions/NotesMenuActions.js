@@ -14,8 +14,10 @@ const NotesMenuActions = ({setFilter, setSortBy, dropdownValue}) => {
         <div>
           <label htmlFor="sortBy">Sort by: </label>
           <select name="sortBy" id="sortBy" onChange={setSortBy} value={dropdownValue}>
-            <option value="created">Created</option>
-            <option value="edited">Edited</option>
+            <option value="createdAsc">Created Asc</option>
+            <option value="createdDesc">Created Desc</option>
+            <option value="editedAsc">Edited Asc</option>
+            <option value="editedDesc">Edited Desc</option>
           </select>
         </div>
     </div>

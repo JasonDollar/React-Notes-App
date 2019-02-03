@@ -13,7 +13,7 @@ import classes from './NotesList.module.scss'
 const NotesList = ({notes, toggleNoteList, showNoteList}) => {
 
   const [filter, setFilter] = useState('')
-  const [sortBy, setSortBy] = useState('created')
+  const [sortBy, setSortBy] = useState('createdAsc')
 
   const textFilterHandler = e => {
     const value = e.target.value
