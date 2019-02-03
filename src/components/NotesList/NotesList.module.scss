@@ -12,6 +12,7 @@
   transform: translateX(-100%);
   transition: all .3s;
   background: white;
+  overflow: scroll;
 
   &.active {
     transform: translateX(0);

@@ -4,6 +4,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import store from './store'
+import 'normalize.css'
 import './index.css';
 import App from './App';
 import * as actions from './store/actions'
@@ -26,12 +27,3 @@ ReactDOM.render(app, document.getElementById('root'));
 serviceWorker.unregister();
 
 
-/*
-    apiKey: "AIzaSyBehX-0_61woayouo2MAxXwdpkErqZkOno",
-    authDomain: "react-notes-56e35.firebaseapp.com",
-    databaseURL: "https://react-notes-56e35.firebaseio.com",
-    projectId: "react-notes-56e35",
-    storageBucket: "react-notes-56e35.appspot.com",
-    messagingSenderId: "892435779270"
-
-*/

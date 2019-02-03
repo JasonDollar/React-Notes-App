@@ -69,7 +69,13 @@ class NoteForm extends Component {
     return (
       <div className={classes.noteForm}>
         <span className="icon">
-          <FontAwesomeIcon icon="arrow-left" onClick={() => this.props.history.push('/notes')} />
+          <FontAwesomeIcon icon="arrow-left" onClick={() => {
+            if (this.state.id) {
+              this.props.history.push(`/notes/${this.state.id}`)
+            } else {
+              this.props.history.push('/notes') 
+            }
+          }} />
         </span>
         <form onSubmit={this.onFormSubmit}>
           <input type="text" value={this.state.title} onChange={this.onInputChange} id="title" name="title"/>
