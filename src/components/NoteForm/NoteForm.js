@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 // import {Redirect} from 'react-router-dom'
 // import uuid from 'uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ActionButton from '../styles/ActionButton'
 import * as actions from '../../store/actions'
 
 import classes from './NoteForm.module.scss'
@@ -68,21 +69,22 @@ class NoteForm extends Component {
   render() {
     return (
       <div className={classes.noteForm}>
-        <span className="icon">
-          <FontAwesomeIcon icon="arrow-left" onClick={() => {
-            if (this.state.id) {
-              this.props.history.push(`/notes/${this.state.id}`)
-            } else {
-              this.props.history.push('/notes') 
-            }
-          }} />
-        </span>
+        <ActionButton onClick={() => {
+          if (this.state.id) {
+            this.props.history.push(`/notes/${this.state.id}`)
+          } else {
+            this.props.history.push('/notes') 
+          }
+        }}>
+          <FontAwesomeIcon icon="arrow-left" />
+          {' '}Go back
+        </ActionButton>
         <form onSubmit={this.onFormSubmit}>
           <input type="text" value={this.state.title} onChange={this.onInputChange} id="title" name="title"/>
           <textarea id="body" onChange={this.onInputChange} value={this.state.body} name="body"></textarea>
-          <button type="submit">
-            <span className="icon"><FontAwesomeIcon icon="save" />Save note</span>
-          </button>
+          <ActionButton type="submit">
+            <span className="icon"><FontAwesomeIcon icon="save" />{' '}Save note</span>
+          </ActionButton>
         </form>
       </div>
     )

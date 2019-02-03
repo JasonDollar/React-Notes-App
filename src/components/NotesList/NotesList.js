@@ -14,6 +14,7 @@ const NotesList = ({notes, toggleNoteList, showNoteList}) => {
 
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
+  const [activeClassId, setActiveClassId] = useState(0)
 
   const textFilterHandler = e => {
     const value = e.target.value
@@ -35,7 +36,7 @@ const NotesList = ({notes, toggleNoteList, showNoteList}) => {
     <div className={containerClasses}>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
       <ul className={classes.notesList}>
-        {processedNotes.map(item => <NotesListItem note={item} key={item.id} toggleNoteList={toggleNoteList}/>)}
+        {processedNotes.map(item => <NotesListItem note={item} key={item.id} toggleNoteList={toggleNoteList} isActive={activeClassId === item.id} setActiveClassId={setActiveClassId}/>)}
       </ul>
     </div>
   )

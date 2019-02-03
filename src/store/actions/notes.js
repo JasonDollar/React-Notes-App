@@ -61,7 +61,7 @@ export const setNotes = () => {
       .then(querySnapshot => {
         querySnapshot.forEach(item => {
           const noteBody = item.data()
-          console.log(noteBody, item.id)
+          // console.log(noteBody, item.id)
           notes.push({
             ...noteBody,
             id: item.id,

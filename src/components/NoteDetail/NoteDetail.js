@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ActionButton from '../styles/ActionButton'
 
 
 import * as actions from '../../store/actions'
@@ -19,12 +20,12 @@ const NoteDetail = (props) => {
     return (
       <div className={classes.main}>
       <div className={classes.onlyMobile}>
-        <span className="icon">
+        <ActionButton>
           <FontAwesomeIcon icon="arrow-left" onClick={() => {
             props.toggleNoteList()
             props.history.push('/notes')
-          }}/>
-        </span>
+          }}/>{' '}Go back
+        </ActionButton>
       </div>
       <p>Details:</p>
       <h1>{note.title}</h1>
@@ -32,13 +33,13 @@ const NoteDetail = (props) => {
       <p>Created: {moment(note.createdAt).format('LLL')}</p>
       <p>Last edited: {moment(note.editedAt).fromNow()}</p>
       <Link to={`/edit/${note.id}`}>
-        <button>
+        <ActionButton>
           <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
-        </button>
+        </ActionButton>
       </Link>
-      <button onClick={() => props.removeNote(note.id)}>
-        <span className="icon"><FontAwesomeIcon icon="trash-alt"/>Delete Note</span>
-      </button>
+      <ActionButton type="danger" onClick={() => props.removeNote(note.id)}>
+        <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
+      </ActionButton>
       </div>
     )
   } else return <Redirect to="/notes" />

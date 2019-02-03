@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom'
 // import { connect } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 
 import classes from './App.module.css'
@@ -11,7 +11,7 @@ import NoteForm from './components/NoteForm/NoteForm'
 import NotesList from './components/NotesList/NotesList'
 import NoteDetail from './components/NoteDetail/NoteDetail'
 
-library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft)
+library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch)
 
 
 class App extends Component {
