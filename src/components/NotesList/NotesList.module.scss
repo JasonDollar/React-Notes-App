@@ -1,31 +1,21 @@
 .NotesList {
   /* flex: 3; */
-  display: grid;
-  grid-template-rows: auto 1fr;
-  overflow: visible;
-  position: fixed;
-  
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: translateX(-100%);
-  transition: all .3s;
-  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  // grid-template-rows: auto 1fr;
+  max-height: 100vh;
   overflow-y: scroll;
+  // transition: all .3s;
+  background: white;
 
-  &.active {
-    transform: translateX(0);
-  }
-  @media (min-width: 766px) {
-    position: static;
-    transform: translateX(0);
-  }
+
 }
 
-.notesList {
+.list {
   display: grid;
   grid-template-rows: repeat(minmax(10rem, 12rem));
+  // overflow-y: scroll;
   list-style: none;
   margin: 1rem;
   padding: 0;

@@ -1,16 +1,16 @@
-import React, {Component, useState} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import uuid from 'uuid'
-import classNames from 'classnames'
+// import uuid from 'uuid'
+// import classNames from 'classnames'
 
 import {filterNotesInOrder} from '../../helpers'
-import * as actions from '../../store/actions'
+// import * as actions from '../../store/actions'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 
 import classes from './NotesList.module.scss'
 
-const NotesList = ({notes, toggleNoteList, showNoteList}) => {
+const NotesList = ({notes, toggleNoteDetail}) => {
 
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
@@ -26,17 +26,14 @@ const NotesList = ({notes, toggleNoteList, showNoteList}) => {
     setSortBy(value)
   }
 
-  const containerClasses = classNames({
-    [classes.NotesList]: true,
-    [classes.active]: showNoteList,
-  })
+
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
   
   return (
-    <div className={containerClasses}>
+    <div className={classes.NotesList}>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
-      <ul className={classes.notesList}>
-        {processedNotes.map(item => <NotesListItem note={item} key={item.id} toggleNoteList={toggleNoteList} isActive={activeClassId === item.id} setActiveClassId={setActiveClassId}/>)}
+      <ul className={classes.list}>
+        {processedNotes.map(item => <NotesListItem note={item} key={item.id} toggleNoteDetail={toggleNoteDetail} isActive={activeClassId === item.id} setActiveClassId={setActiveClassId}/>)}
       </ul>
     </div>
   )

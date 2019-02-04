@@ -1,4 +1,4 @@
-import moment from 'moment'
+
 
 export const filterNotesInOrder = (notes, textFilter, sortBy) => {
   return notes.filter(item => {

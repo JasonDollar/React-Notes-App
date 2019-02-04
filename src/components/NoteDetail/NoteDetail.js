@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import classNames from 'classnames'
 import ActionButton from '../styles/ActionButton'
 
 
@@ -15,16 +16,21 @@ const NoteDetail = (props) => {
   const filtered = props.notes.filter(item => item.id === props.match.params.id)
   const note = filtered[0]
   console.log(props.notes)
+
+  const containerClasses = classNames({
+    [classes.main]: true,
+    [classes.active]: props.showNoteDetail,
+  })
   
   if (note) {
     return (
-      <div className={classes.main}>
+      <div className={containerClasses}>
       <div className={classes.onlyMobile}>
-        <ActionButton>
-          <FontAwesomeIcon icon="arrow-left" onClick={() => {
-            props.toggleNoteList()
-            props.history.push('/notes')
-          }}/>{' '}Go back
+        <ActionButton onClick={() => {
+          props.toggleNoteDetail()
+          props.history.push('/notes')
+        }}>
+          <FontAwesomeIcon icon="arrow-left" />{' '}Go back
         </ActionButton>
       </div>
       <p>Details:</p>

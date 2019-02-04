@@ -3,9 +3,9 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 // import { connect } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 
-import classes from './App.module.css'
+import classes from './App.module.scss'
 // import Header from './components/Header/Header'
 import NoteForm from './components/NoteForm/NoteForm'
 import NotesList from './components/NotesList/NotesList'
@@ -16,13 +16,13 @@ library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch)
 
 class App extends Component {
   state = {
-    showNoteList : true,
+    showNoteDetail : false,
   }
   // componentDidMount = () => {
   //   // this.props.setNotes()
   // }
-  toggleNoteList = () => {
-    this.setState(prevState => ({showNoteList: !prevState.showNoteList}))
+  toggleNoteDetail = () => {
+    this.setState(prevState => ({showNoteDetail: !prevState.showNoteDetail}))
   }
   
   render() {
@@ -33,11 +33,15 @@ class App extends Component {
 
         <Route 
         path="/notes" 
-        render={props => <NotesList {...props} showNoteList={this.state.showNoteList} toggleNoteList={this.toggleNoteList}/>} 
+        render={props => <NotesList {...props}  toggleNoteDetail={this.toggleNoteDetail}/>} 
         />
           <Switch>
             <Route path="/" exact render={() => <Redirect to="/notes" />} />
-            <Route path="/notes/:id" render={props => <NoteDetail {...props} toggleNoteList={this.toggleNoteList}/>} />
+            <Route path="/notes/:id" render={props => (
+              <NoteDetail {...props} 
+              toggleNoteDetail={this.toggleNoteDetail} 
+              showNoteDetail={this.state.showNoteDetail}
+            />) } />
             <Route path="/edit/:id" render={(props) => <NoteForm action="editNote" {...props} />} />
             <Route path="/create" component={NoteForm} />
           </Switch>

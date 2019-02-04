@@ -1,0 +1,14 @@
+.App {
+  max-height: 100vh;
+  // overflow-y: hidden;
+}
+
+.main {
+  width: 100%;
+  
+  @media (min-width: 767px) {
+    display: grid;
+  grid-template-columns: 32rem 1fr;
+  // overflow-y: hidden;
+  }
+} 

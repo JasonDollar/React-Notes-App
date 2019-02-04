@@ -13,7 +13,10 @@ const ListItem = styled.li`
   padding: 0 1rem;
 
   &.active {
-    background-color: #ccc;
+    @media (min-width: 767px) {
+      background-color: #ccc;
+      
+    }
   }
 
   & a:link,
@@ -24,12 +27,12 @@ const ListItem = styled.li`
   }
 `
 
-const NotesListItem = ({note, toggleNoteList, isActive, setActiveClassId}) => {
+const NotesListItem = ({note, toggleNoteDetail, isActive, setActiveClassId}) => {
   const {title, body, id, createdAt} = note
   let notesBody
 
-  if (body.length > 30) {
-    notesBody = body.substring(0, 30) + ' ...'
+  if (body.length > 32) {
+    notesBody = body.substring(0, 32) + '...'
   } else {
     notesBody = body
   }
@@ -39,13 +42,11 @@ const NotesListItem = ({note, toggleNoteList, isActive, setActiveClassId}) => {
       className={classNames({
         active: isActive,
       })}
-      onClick={() => {
-        toggleNoteList()
-        setActiveClassId(id)
-      }} 
-    
     >
-      <Link to={`/notes/${id}`} >
+      <Link to={`/notes/${id}`} onClick={() => {
+        toggleNoteDetail()
+        setActiveClassId(id)
+      }} >
 
         <h3>{title}</h3>
         <p>{notesBody}</p>
