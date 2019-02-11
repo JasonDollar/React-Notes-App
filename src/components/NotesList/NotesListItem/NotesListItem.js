@@ -9,12 +9,12 @@ import classNames from 'classnames'
 const ListItem = styled.li`
   outline: none;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid ${props => props.theme.lightGrey};
   padding: 0 1rem;
 
   &.active {
     @media (min-width: 767px) {
-      background-color: #ccc;
+      background-color: ${props => props.theme.lightGrey};
       
     }
   }

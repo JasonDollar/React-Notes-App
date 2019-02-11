@@ -5,12 +5,17 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styled from 'styled-components'
 import classNames from 'classnames'
 import ActionButton from '../styles/ActionButton'
 
-
 import * as actions from '../../store/actions'
 import classes from './NoteDetail.module.scss';
+
+const ColorProvider = styled.main`
+  background: ${props => props.theme.background};
+  color: ${props => props.theme.fontColor};
+`
 
 const NoteDetail = (props) => {
   const filtered = props.notes.filter(item => item.id === props.match.params.id)
@@ -24,7 +29,7 @@ const NoteDetail = (props) => {
   
   if (note) {
     return (
-      <div className={containerClasses}>
+      <ColorProvider className={containerClasses}>
       <div className={classes.onlyMobile}>
         <ActionButton onClick={() => {
           props.toggleNoteDetail()
@@ -48,7 +53,7 @@ const NoteDetail = (props) => {
           <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
         </ActionButton>
       </div>
-      </div>
+      </ColorProvider>
     )
   } else return <Redirect to="/notes" />
 }

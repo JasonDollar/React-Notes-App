@@ -8,7 +8,9 @@
   
   @media (min-width: 767px) {
     display: grid;
-  grid-template-columns: 32rem 1fr;
+  // grid-template-columns: 32rem 1fr;
+  grid-template-columns: [list-start] 32rem [list-end] 1fr [note-end];
+  grid-template-areas: "list note"
   // overflow-y: hidden;
   }
 } 
