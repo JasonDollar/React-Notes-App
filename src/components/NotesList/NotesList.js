@@ -22,7 +22,6 @@ const NotesList = ({notes, toggleNoteDetail}) => {
   }
   const dropdownSortHandler = e => {
     const value = e.target.value
-    console.log(value)
     setSortBy(value)
   }
 
@@ -33,25 +32,20 @@ const NotesList = ({notes, toggleNoteDetail}) => {
     <div className={classes.NotesList}>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
       <ul className={classes.list}>
-        {processedNotes.map(item => <NotesListItem note={item} key={item.id} toggleNoteDetail={toggleNoteDetail} isActive={activeClassId === item.id} setActiveClassId={setActiveClassId}/>)}
+        {processedNotes.map(item => (
+            <NotesListItem 
+              note={item} key={item.id} 
+              toggleNoteDetail={toggleNoteDetail} 
+              isActive={activeClassId === item.id} 
+              setActiveClassId={setActiveClassId}
+            />)
+          )}
       </ul>
     </div>
   )
 }
 
 
-// class NotesList extends Component {
-//   // componentDidMount = () => {
-//   //   this.props.setNotes()
-//   // }
-  
-//   render() {
-//     const {notes} = this.props
-//     return (
-      
-//     )
-//   }
-// }
 const mapStateToProps = state => ({
   notes: state.notes
 })

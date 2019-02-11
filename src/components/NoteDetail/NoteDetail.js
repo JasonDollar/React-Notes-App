@@ -33,19 +33,21 @@ const NoteDetail = (props) => {
           <FontAwesomeIcon icon="arrow-left" />{' '}Go back
         </ActionButton>
       </div>
-      <p>Details:</p>
-      <h1>{note.title}</h1>
-      <h3>{note.body}</h3>
-      <p>Created: {moment(note.createdAt).format('LLL')}</p>
-      <p>Last edited: {moment(note.editedAt).fromNow()}</p>
-      <Link to={`/edit/${note.id}`}>
-        <ActionButton>
-          <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+      <div className={classes.content}>
+        <p>Details:</p>
+        <h1>{note.title}</h1>
+        <h3>{note.body}</h3>
+        <p>Created: {moment(note.createdAt).format('LLL')}</p>
+        <p>Last edited: {moment(note.editedAt).fromNow()}</p>
+        <Link to={`/edit/${note.id}`}>
+          <ActionButton>
+            <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+          </ActionButton>
+        </Link>
+        <ActionButton type="danger" onClick={() => props.removeNote(note.id)}>
+          <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
         </ActionButton>
-      </Link>
-      <ActionButton type="danger" onClick={() => props.removeNote(note.id)}>
-        <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
-      </ActionButton>
+      </div>
       </div>
     )
   } else return <Redirect to="/notes" />

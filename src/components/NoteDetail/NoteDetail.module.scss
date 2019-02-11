@@ -1,5 +1,8 @@
 .main {
+  // display: flex;
+  // flex-direction: column;
   margin: 0 1rem;
+  margin-top: 2rem;
   background: white;
   position: fixed;
   top: 0;
@@ -14,8 +17,20 @@
   }
   @media (min-width: 766px) {
     position: static;
+
     transform: translateX(0);
   }
+  & .content {
+    position: static;
+    @media (min-width: 766px) {
+      position: sticky;
+      top: 0px;
+      right: 0;
+      width: 100%;
+      transform: translateX(0);
+    }
+  }
+  
 }
 
 .onlyMobile {
