@@ -5,7 +5,7 @@ import {ThemeProvider} from 'styled-components'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
 // import classNames from 'classnames'
-
+import {firebase} from './firebase'
 import classes from './App.module.scss'
 // import Header from './components/Header/Header'
 import NoteForm from './components/NoteForm/NoteForm'
@@ -13,6 +13,7 @@ import NotesList from './components/NotesList/NotesList'
 import NoteDetail from './components/NoteDetail/NoteDetail'
 import NotesPlaceholder from './components/NotesPlaceholder/NotesPlaceholder'
 import Header from './components/Header/Header'
+import Login from './components/Login/Login'
 import {theme} from './components/styles/theme'
 
 library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch)
@@ -28,6 +29,11 @@ class App extends Component {
   // }
   toggleNoteDetail = () => {
     this.setState(prevState => ({showNoteDetail: !prevState.showNoteDetail}))
+  }
+
+  createUser = (email, password) => {
+    firebase.auth().createUsercreateUserWithEmailAndPassword(email, password)
+    console.log(firebase)
   }
   
   render() {
@@ -52,6 +58,7 @@ class App extends Component {
             />) } />
             <Route path="/edit/:id" render={(props) => <NoteForm action="editNote" {...props} />} />
             <Route path="/create" component={NoteForm} />
+            <Route path="/login" render={props => <Login createUser={this.createUser} {...props} />} />
           </Switch>
         </div>
         
