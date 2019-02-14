@@ -5,7 +5,6 @@ import {db} from '../../firebase'
 export const addNotetoStore = (note, id) => ({
   type: actionTypes.ADD_NOTE,
   payload: {
-    id: id,
     title: note.title,
     body: note.body,
     createdAt: note.createdAt,

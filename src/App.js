@@ -8,7 +8,8 @@ import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortaw
 import {firebase} from './firebase'
 import classes from './App.module.scss'
 // import Header from './components/Header/Header'
-import NoteForm from './components/NoteForm/NoteForm'
+import AddNote from './components/AddNote/AddNote'
+import EditNote from './components/EditNote/EditNote'
 import NotesList from './components/NotesList/NotesList'
 import NoteDetail from './components/NoteDetail/NoteDetail'
 import NotesPlaceholder from './components/NotesPlaceholder/NotesPlaceholder'
@@ -31,10 +32,10 @@ class App extends Component {
     this.setState(prevState => ({showNoteDetail: !prevState.showNoteDetail}))
   }
 
-  createUser = (email, password) => {
-    firebase.auth().createUsercreateUserWithEmailAndPassword(email, password)
-    console.log(firebase)
-  }
+  // createUser = (email, password) => {
+  //   firebase.auth().createUsercreateUserWithEmailAndPassword(email, password)
+  //   console.log(firebase)
+  // }
   
   render() {
     const appTheme = theme[this.state.themeColor]
@@ -56,8 +57,8 @@ class App extends Component {
               toggleNoteDetail={this.toggleNoteDetail} 
               showNoteDetail={this.state.showNoteDetail}
             />) } />
-            <Route path="/edit/:id" render={(props) => <NoteForm action="editNote" {...props} />} />
-            <Route path="/create" component={NoteForm} />
+            <Route path="/edit/:id" component={EditNote} />
+            <Route path="/create" component={AddNote} />
             <Route path="/login" render={props => <Login createUser={this.createUser} {...props} />} />
           </Switch>
         </div>

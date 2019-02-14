@@ -7,10 +7,14 @@ import 'moment/locale/en-gb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 import classNames from 'classnames'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
+
+
 import ActionButton from '../styles/ActionButton'
 
 import * as actions from '../../store/actions'
-import classes from './NoteDetail.module.scss';
+import classes from './NoteDetail.module.scss'
 
 const ColorProvider = styled.main`
   background: ${props => props.theme.background};
@@ -18,9 +22,15 @@ const ColorProvider = styled.main`
 `
 
 const NoteDetail = (props) => {
-  const filtered = props.notes.filter(item => item.id === props.match.params.id)
-  const note = filtered[0]
-  console.log(props.notes)
+  let note
+  if (props.notes) {
+    const filtered = props.notes.filter(item => item.id === props.match.params.id)
+    note = filtered[0]
+  } else {
+    return <Redirect to="/notes" />
+  }
+  // console.log(props.notes)
+ 
 
   const containerClasses = classNames({
     [classes.main]: true,
@@ -49,7 +59,7 @@ const NoteDetail = (props) => {
             <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
           </ActionButton>
         </Link>
-        <ActionButton type="danger" onClick={() => props.removeNote(note.id)}>
+        <ActionButton type="danger" onClick={() => props.firestore.delete({collection: 'notes', doc: note.id}) }>
           <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
         </ActionButton>
       </div>
@@ -59,11 +69,14 @@ const NoteDetail = (props) => {
 }
 
 const mapStateToProps = state => ({
-  notes: state.notes
+  notes: state.firestore.ordered.notes
 })
 
 const mapDispatchToProps = dispatch => ({
   removeNote: (id) => dispatch(actions.removeNote(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteDetail)
+export default compose(
+  firestoreConnect(),
+connect(mapStateToProps, mapDispatchToProps)
+)(NoteDetail)

@@ -26,15 +26,17 @@ const NotesList = ({notes, toggleNoteDetail}) => {
     const value = e.target.value
     setSortBy(value)
   }
+  // console.log(firestore)
 
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
+  // const processedNotes = notes
   
   return (
     <div className={classes.NotesList}>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
       <ul className={classes.list}>
-        {processedNotes.map(item => (
+        {processedNotes && processedNotes.map(item => (
             <NotesListItem 
               note={item} key={item.id} 
               toggleNoteDetail={toggleNoteDetail} 
@@ -49,7 +51,7 @@ const NotesList = ({notes, toggleNoteDetail}) => {
 
 
 const mapStateToProps = state => ({
-  notes: state.notes
+  notes: state.firestore.ordered.notes
 })
 
 // const mapDispatchToProps = dispatch => ({
