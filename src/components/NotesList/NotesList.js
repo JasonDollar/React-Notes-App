@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
 // import uuid from 'uuid'
 // import classNames from 'classnames'
 
@@ -54,4 +56,9 @@ const mapStateToProps = state => ({
 //   setNotes: () => dispatch(actions.setNotes())
 // })
 
-export default connect(mapStateToProps)(NotesList)
+export default compose(
+  firestoreConnect([{collection: 'notes'}]),
+  connect(mapStateToProps)
+  )(NotesList)
+
+// export default connect(mapStateToProps)(NotesList)
