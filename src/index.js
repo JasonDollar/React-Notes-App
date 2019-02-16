@@ -6,13 +6,11 @@ import {BrowserRouter} from 'react-router-dom'
 
 import firebase from 'firebase'
 import 'firebase/firestore';
-// import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
-import { reduxFirestore, firestoreReducer, createFirestoreInstance } from 'redux-firestore';
-// Reducers
-import {firebaseConfig} from './firebase'
+import {createFirestoreInstance } from 'redux-firestore';
 
-import store from './store'
+import {firebaseConfig} from './firebase'
+// import store from './store'
 import 'normalize.css'
 import './index.css';
 import App from './App';
