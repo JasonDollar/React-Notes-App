@@ -13,7 +13,6 @@ import {compose} from 'redux'
 
 import ActionButton from '../styles/ActionButton'
 
-import * as actions from '../../store/actions'
 import classes from './NoteDetail.module.scss'
 
 const ColorProvider = styled.main`
@@ -29,7 +28,6 @@ const NoteDetail = (props) => {
   } else {
     return <Redirect to="/notes" />
   }
-  // console.log(props.notes)
  
 
   const containerClasses = classNames({
@@ -72,11 +70,11 @@ const mapStateToProps = state => ({
   notes: state.firestore.ordered.notes
 })
 
-const mapDispatchToProps = dispatch => ({
-  removeNote: (id) => dispatch(actions.removeNote(id))
-})
+// const mapDispatchToProps = dispatch => ({
+//   removeNote: (id) => dispatch(actions.removeNote(id))
+// })
 
 export default compose(
   firestoreConnect(),
-connect(mapStateToProps, mapDispatchToProps)
+connect(mapStateToProps)
 )(NoteDetail)

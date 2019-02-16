@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+
 import {Redirect} from 'react-router-dom'
-// import uuid from 'uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 
 import ActionButton from '../styles/ActionButton'
-import * as actions from '../../store/actions'
 
 // import classes from './AddNote.module.scss'
 
@@ -41,11 +40,7 @@ class EditNote extends Component {
   onInputChange = e => {
     const elementName =  e.target.name
     const elementValue = e.target.value
-    // if (elementName === 'title') {
-    //   this.setState({title: elementValue})
-    // } else if (elementName === 'body') {
-    //   this.setState({body : elementValue})
-    // }
+
     this.setState({[elementName]: elementValue})
   }
 
@@ -59,12 +54,7 @@ class EditNote extends Component {
       editedAt: Date.now(),
       createdAt: this.state.createdAt ? this.state.createdAt : Date.now()
     }
-    // if (this.props.action === 'editNote') {
-    //   this.props.editNote(note)
-    // } else {
 
-    //   this.props.addNote(note)
-    // }
     firestore.update({collection: 'notes', doc: this.state.id}, note)
       .then(() => history.push(`/notes/${this.state.id}`) )
   }
@@ -99,14 +89,14 @@ const mapStateToProps = state => ({
   notes: state.firestore.ordered.notes
 })
 
-const mapDispatchToProps = dispatch => ({
-  addNote: (note) => dispatch(actions.addNote(note)),
-  editNote: (note) => dispatch(actions.editNote(note))
-})
+// const mapDispatchToProps = dispatch => ({
+//   addNote: (note) => dispatch(actions.addNote(note)),
+//   editNote: (note) => dispatch(actions.editNote(note))
+// })
 
 export default compose (
   firestoreConnect(props => [
     {collection: 'notes', doc: props.match.params.id}
   ]),
-connect(mapStateToProps, mapDispatchToProps)
+connect(mapStateToProps)
 )(EditNote)

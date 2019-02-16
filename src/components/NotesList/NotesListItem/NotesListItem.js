@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import moment from 'moment'
 import classNames from 'classnames'
-// import {withRouter} from 'react-router-dom'
-// import classes from './NoteListItem.module.scss';
 
 const ListItem = styled.li`
   outline: none;

@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
-// import { connect } from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
-// import classNames from 'classnames'
-import {firebase} from './firebase'
+
 import classes from './App.module.scss'
-// import Header from './components/Header/Header'
 import AddNote from './components/AddNote/AddNote'
 import EditNote from './components/EditNote/EditNote'
 import NotesList from './components/NotesList/NotesList'
 import NoteDetail from './components/NoteDetail/NoteDetail'
 import NotesPlaceholder from './components/NotesPlaceholder/NotesPlaceholder'
 import Header from './components/Header/Header'
-import Login from './components/Login/Login'
+import SignIn from './components/SignIn/SignIn'
+import SignUp from './components/SignUp/SignUp'
 import {theme} from './components/styles/theme'
 
 library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch)
@@ -31,17 +29,12 @@ class App extends Component {
   toggleNoteDetail = () => {
     this.setState(prevState => ({showNoteDetail: !prevState.showNoteDetail}))
   }
-
-  // createUser = (email, password) => {
-  //   firebase.auth().createUsercreateUserWithEmailAndPassword(email, password)
-  //   console.log(firebase)
-  // }
   
   render() {
     const appTheme = theme[this.state.themeColor]
     return (
       <ThemeProvider theme={appTheme}>
-      <>
+      <Fragment>
         <Header />
         <div className={`${classes.main} container`}>
 
@@ -59,12 +52,13 @@ class App extends Component {
             />) } />
             <Route path="/edit/:id" component={EditNote} />
             <Route path="/create" component={AddNote} />
-            <Route path="/login" render={props => <Login createUser={this.createUser} {...props} />} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/signin" component={SignIn} />
           </Switch>
         </div>
         
         
-        </>
+        </Fragment>
       </ThemeProvider>
     );
   }

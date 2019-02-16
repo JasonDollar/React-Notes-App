@@ -1,6 +1,16 @@
+// export {
+//   addNote,
+//   removeNote,
+//   editNote,
+//   setNotes,
+// } from './notes'
+
 export {
-  addNote,
-  removeNote,
-  editNote,
-  setNotes,
-} from './notes'
+  signUp,
+  signIn,
+  signOut,
+  getUserUid,
+  getUserData,
+  authFailure,
+  authSuccess
+} from './auth'

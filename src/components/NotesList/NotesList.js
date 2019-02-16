@@ -2,11 +2,9 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-// import uuid from 'uuid'
 // import classNames from 'classnames'
 
 import {filterNotesInOrder} from '../../helpers'
-// import * as actions from '../../store/actions'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 
@@ -26,11 +24,9 @@ const NotesList = ({notes, toggleNoteDetail}) => {
     const value = e.target.value
     setSortBy(value)
   }
-  // console.log(firestore)
 
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
-  // const processedNotes = notes
   
   return (
     <div className={classes.NotesList}>
@@ -54,9 +50,7 @@ const mapStateToProps = state => ({
   notes: state.firestore.ordered.notes
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   setNotes: () => dispatch(actions.setNotes())
-// })
+
 
 export default compose(
   firestoreConnect([{collection: 'notes'}]),

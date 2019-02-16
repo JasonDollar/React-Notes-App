@@ -1,8 +1,8 @@
 import * as actionTypes from './actionTypes'
-import {db} from '../../firebase'
+import {firestore} from '../../firebase'
 
 
-export const addNotetoStore = (note, id) => ({
+export const addNotetoStore = (note) => ({
   type: actionTypes.ADD_NOTE,
   payload: {
     title: note.title,
@@ -14,7 +14,7 @@ export const addNotetoStore = (note, id) => ({
 
 export const addNote = (note) => {
   return dispatch => {
-    db.collection('notes').add(note)
+    firestore.collection('notes').add(note)
       .then(docRef => dispatch(addNotetoStore(note, docRef.id)))
   }
 }
@@ -26,7 +26,7 @@ export const removeNoteInStore = (id) => ({
 
 export const removeNote = id => {
   return dispatch => {
-    db.collection('notes').doc(id).delete()
+    firestore.collection('notes').doc(id).delete()
       .then(() => dispatch(removeNoteInStore(id)))
   }
 }
@@ -43,7 +43,7 @@ export const editNoteInStore = note => ({
 
 export const editNote = (note) => {
   return dispatch => {
-    db.collection('notes').doc(note.id).set(note)
+    firestore.collection('notes').doc(note.id).set(note)
       .then(() => dispatch(editNoteInStore(note))) 
   }
 }
@@ -56,7 +56,7 @@ export const setNotesToStore = (notes) => ({
 export const setNotes = () => {
   return dispatch => {
     const notes = []
-     db.collection('notes').get()
+     firestore.collection('notes').get()
       .then(querySnapshot => {
         querySnapshot.forEach(item => {
           const noteBody = item.data()
