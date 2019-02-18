@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -21,6 +21,16 @@ const ColorProvider = styled.main`
 `
 
 const NoteDetail = (props) => {
+  const [isActive, setActive] = useState(false)
+
+  useEffect(() => {
+    setActive(true)
+
+    return () => {
+      setActive(false)
+    }
+  }, [])
+
   let note
   if (props.notes) {
     const filtered = props.notes.filter(item => item.id === props.match.params.id)
@@ -32,7 +42,7 @@ const NoteDetail = (props) => {
 
   const containerClasses = classNames({
     [classes.main]: true,
-    [classes.active]: props.showNoteDetail,
+    [classes.active]: isActive,
   })
   
   if (note) {

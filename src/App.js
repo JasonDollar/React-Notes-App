@@ -5,6 +5,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
 
 import classes from './App.module.scss'
+
+import Welcome from './components/Welcome/Welcome'
 import AddNote from './components/AddNote/AddNote'
 import EditNote from './components/EditNote/EditNote'
 import NotesList from './components/NotesList/NotesList'
@@ -43,7 +45,7 @@ class App extends Component {
         render={props => <NotesList {...props}  toggleNoteDetail={this.toggleNoteDetail}/>} 
         />
           <Switch>
-            <Route path="/" exact render={() => <Redirect to="/notes" />} />
+            <Route path="/" exact component={Welcome} />
             <Route path="/notes" exact component={NotesPlaceholder} />
             <Route path="/notes/:id" render={props => (
               <NoteDetail {...props} 

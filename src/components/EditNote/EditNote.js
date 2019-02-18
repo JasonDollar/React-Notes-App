@@ -48,14 +48,14 @@ class EditNote extends Component {
     e.preventDefault();
     const {firestore, history} = this.props
     const note = {
-      id: this.state.id ? this.state.id : '',
+      // id: this.state.id ? this.state.id : '',
       title: this.state.title,
       body: this.state.body,
       editedAt: Date.now(),
-      createdAt: this.state.createdAt ? this.state.createdAt : Date.now()
+      // createdAt: this.state.createdAt ? this.state.createdAt : Date.now()
     }
 
-    firestore.update({collection: 'notes', doc: this.state.id}, note)
+    firestore.update({collection: 'notes'}, note)
       .then(() => history.push(`/notes/${this.state.id}`) )
   }
   
@@ -86,7 +86,8 @@ class EditNote extends Component {
 }
 
 const mapStateToProps = state => ({
-  notes: state.firestore.ordered.notes
+  notes: state.firestore.ordered.notes,
+  userId: state.auth.uid
 })
 
 // const mapDispatchToProps = dispatch => ({

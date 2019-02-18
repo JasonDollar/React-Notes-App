@@ -36,7 +36,7 @@ class AddNote extends Component {
       createdAt: Date.now(),
       createdBy: this.props.user ? this.props.user : ''
     }
-    firestore.add({collection: 'notes'}, note)
+    firestore.add({collection: `notes`, doc: this.props.user}, note)
       .then((docRef) => {
         this.props.history.push(`/notes/${docRef.id}`)
       })
