@@ -6,8 +6,18 @@ import {signOut} from '../../store/actions'
 
 const HeaderContainer = styled.div`
   background: royalblue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
   width: 100%;
-  line-height: 2;
+  height: 4rem;
+  /* line-height: 2; */
+  & .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
   & .container > * {
     margin-right: 2rem;
     color: #fff;

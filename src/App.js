@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Switch } from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
@@ -36,30 +36,29 @@ class App extends Component {
     const appTheme = theme[this.state.themeColor]
     return (
       <ThemeProvider theme={appTheme}>
-      <Fragment>
-        <Header />
-        <div className={`${classes.main} container`}>
+        <Fragment>
+          <Header />
 
-        <Route 
-        path="/notes" 
-        render={props => <NotesList {...props}  toggleNoteDetail={this.toggleNoteDetail}/>} 
-        />
-          <Switch>
-            <Route path="/" exact component={Welcome} />
-            <Route path="/notes" exact component={NotesPlaceholder} />
-            <Route path="/notes/:id" render={props => (
-              <NoteDetail {...props} 
-              toggleNoteDetail={this.toggleNoteDetail} 
-              showNoteDetail={this.state.showNoteDetail}
-            />) } />
-            <Route path="/edit/:id" component={EditNote} />
-            <Route path="/create" component={AddNote} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/signin" component={SignIn} />
-          </Switch>
-        </div>
-        
-        
+          <div className={`${classes.main} container`}>
+            <Route 
+            path="/notes" 
+            render={props => <NotesList {...props}  toggleNoteDetail={this.toggleNoteDetail}/>} 
+            />
+            
+            <Switch>
+              <Route path="/" exact component={Welcome} />
+              <Route path="/notes" exact component={NotesPlaceholder} />
+              <Route path="/notes/view/:id" render={props => (
+                <NoteDetail {...props} 
+                toggleNoteDetail={this.toggleNoteDetail} 
+                showNoteDetail={this.state.showNoteDetail}
+              />) } />
+              <Route path="/notes/edit/:id" component={EditNote} />
+              <Route path="/notes/create" component={AddNote} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
+            </Switch>
+          </div>
         </Fragment>
       </ThemeProvider>
     );

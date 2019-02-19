@@ -8,7 +8,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
   /* min-height: 100vh; */
+  overflow-x: hidden;
 }
+    @media (min-width: 766px) {
+      body {
+        overflow-x: visible;
+      }
+    } 
 
 html {
   font-size: 62.5%;

@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {firebaseConnect} from 'react-redux-firebase'
-import {firebase} from '../../firebase'
+// import {firebaseConnect} from 'react-redux-firebase'
+// import {firebase} from '../../firebase'
 import {signUp} from '../../store/actions'
 
 class SignUp extends React.Component {

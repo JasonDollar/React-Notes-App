@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import DetailContainer from '../styles/DetailContainer'
+
+
 const Container = styled.main`
   display: block;
   @media (max-width: 766px) {
@@ -11,7 +14,9 @@ const Container = styled.main`
 const NotesPlaceholder = () => {
   return (
     <Container>
-      Note Placeholder
+      <DetailContainer>
+        Note Placeholder
+      </DetailContainer>
     </Container>
   )
 }

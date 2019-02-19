@@ -41,7 +41,7 @@ const NotesListItem = ({note, toggleNoteDetail, isActive, setActiveClassId}) => 
         active: isActive,
       })}
     >
-      <Link to={`/notes/${id}`} onClick={() => {
+      <Link to={`/notes/view/${id}`} onClick={() => {
         toggleNoteDetail()
         setActiveClassId(id)
       }} >

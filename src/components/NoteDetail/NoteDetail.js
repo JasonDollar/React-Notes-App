@@ -12,13 +12,12 @@ import {compose} from 'redux'
 
 
 import ActionButton from '../styles/ActionButton'
+import DetailContainer from '../styles/DetailContainer'
+
 
 import classes from './NoteDetail.module.scss'
 
-const ColorProvider = styled.main`
-  background: ${props => props.theme.background};
-  color: ${props => props.theme.fontColor};
-`
+
 
 const NoteDetail = (props) => {
   const [isActive, setActive] = useState(false)
@@ -40,38 +39,38 @@ const NoteDetail = (props) => {
   }
  
 
-  const containerClasses = classNames({
-    [classes.main]: true,
-    [classes.active]: isActive,
-  })
+  // const containerClasses = classNames({
+  //   [classes.main]: true,
+  //   [classes.active]: isActive,
+  // })
   
   if (note) {
     return (
-      <ColorProvider className={containerClasses}>
-      <div className={classes.onlyMobile}>
-        <ActionButton onClick={() => {
-          props.toggleNoteDetail()
-          props.history.push('/notes')
-        }}>
-          <FontAwesomeIcon icon="arrow-left" />{' '}Go back
-        </ActionButton>
-      </div>
-      <div className={classes.content}>
-        <p>Details:</p>
-        <h1>{note.title}</h1>
-        <h3>{note.body}</h3>
-        <p>Created: {moment(note.createdAt).format('LLL')}</p>
-        <p>Last edited: {moment(note.editedAt).fromNow()}</p>
-        <Link to={`/edit/${note.id}`}>
-          <ActionButton>
-            <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+      <DetailContainer className={isActive? 'active' : ''}>
+        <main className="content">
+          <div className={classes.onlyMobile}>
+            <ActionButton onClick={() => {
+              props.toggleNoteDetail()
+              props.history.push('/notes')
+            }}>
+              <FontAwesomeIcon icon="arrow-left" />{' '}Go back
+            </ActionButton>
+          </div>
+          <p>Details:</p>
+          <h1>{note.title}</h1>
+          <h3>{note.body}</h3>
+          <p>Created: {moment(note.createdAt).format('LLL')}</p>
+          <p>Last edited: {moment(note.editedAt).fromNow()}</p>
+          <Link to={`/notes/edit/${note.id}`} style={{display: 'inlineBlock', width: '50%'}}>
+            <ActionButton>
+              <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+            </ActionButton>
+          </Link>
+          <ActionButton type="danger" onClick={() => props.firestore.delete({collection: 'notes', doc: note.id}) }>
+            <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
           </ActionButton>
-        </Link>
-        <ActionButton type="danger" onClick={() => props.firestore.delete({collection: 'notes', doc: note.id}) }>
-          <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
-        </ActionButton>
-      </div>
-      </ColorProvider>
+        </main>
+      </DetailContainer>
     )
   } else return <Redirect to="/notes" />
 }
