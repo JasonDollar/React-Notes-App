@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import 'firebase/firestore';
-// import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
+import { reactReduxFirebase, authIsReady } from 'react-redux-firebase';
 // import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 // import { reduxFirestore, firestoreReducer } from 'redux-firestore';
 
@@ -36,7 +36,16 @@ const store = createStore(
   //   reactReduxFirebase(firebase),
   //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   // )
-);
+)
+
+export const getStateFromStore = () => {
+  const state = store.getState()
+  if (state.firebase.auth.uid) {
+    return state.firebase.auth.uid
+  } else {
+    return ''
+  }
+}
 
 export default store;
 

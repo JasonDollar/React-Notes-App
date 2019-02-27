@@ -3,12 +3,15 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 // import classNames from 'classnames'
-
+import {getCurrentUser} from '../../firebase'
+import {getStateFromStore} from '../../store'
 import {filterNotesInOrder} from '../../helpers'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 
 import classes from './NotesList.module.scss'
+
+
 
 const NotesList = ({notes, toggleNoteDetail}) => {
 
@@ -24,7 +27,7 @@ const NotesList = ({notes, toggleNoteDetail}) => {
     const value = e.target.value
     setSortBy(value)
   }
-
+  
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
   
@@ -52,8 +55,9 @@ const mapStateToProps = state => ({
 
 
 
+
 export default compose(
-  firestoreConnect([{collection: 'notes'}]),
+  firestoreConnect([{collection: 'notes', where: ['createdBy', '==', getStateFromStore()]}]),
   connect(mapStateToProps)
   )(NotesList)
 

@@ -29,20 +29,30 @@ const rrfProps = {
 }
 
 
-const app = (
+let app = (
   <Provider store={store}>
   <ReactReduxFirebaseProvider {...rrfProps}>
   <BrowserRouter>
     
-      <App />
+      
   </BrowserRouter>
   </ReactReduxFirebaseProvider>
   </Provider>
 )
 
-// authIsReady(store).then(() => {
-
-// })
+authIsReady(store).then(() => {
+  app = (
+    <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+    <BrowserRouter>
+      
+        <App />
+    </BrowserRouter>
+    </ReactReduxFirebaseProvider>
+    </Provider>
+  )
+  ReactDOM.render(app, document.getElementById('root'));
+})
 
 ReactDOM.render(app, document.getElementById('root'));
 
