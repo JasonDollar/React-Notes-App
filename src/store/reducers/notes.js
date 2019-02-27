@@ -23,6 +23,8 @@ const notesReducer = (state = initialState, action) => {
         ...action.payload
       ]
     }
+    case actionTypes.CLEAN_NOTES: 
+      return []
     default: 
       return state
   }

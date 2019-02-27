@@ -1,10 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux'
-// import classNames from 'classnames'
-import {getCurrentUser} from '../../firebase'
-import {getStateFromStore} from '../../store'
+
 import {filterNotesInOrder} from '../../helpers'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
@@ -50,15 +46,10 @@ const NotesList = ({notes, toggleNoteDetail}) => {
 
 
 const mapStateToProps = state => ({
-  notes: state.firestore.ordered.notes
+  notes: state.notes
 })
 
 
 
 
-export default compose(
-  firestoreConnect([{collection: 'notes', where: ['createdBy', '==', getStateFromStore()]}]),
-  connect(mapStateToProps)
-  )(NotesList)
-
-// export default connect(mapStateToProps)(NotesList)
+export default connect(mapStateToProps)(NotesList)

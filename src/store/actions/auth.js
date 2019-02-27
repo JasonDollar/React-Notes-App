@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes'
-import {firebase, firestore} from '../../firebase'
+import {firebase, firestore} from '../../data/firebase'
 
 export const authSuccess = () => ({
   type: actionTypes.AUTH_SUCCESS,

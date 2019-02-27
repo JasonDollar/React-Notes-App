@@ -1,10 +1,12 @@
 import * as actionTypes from './actionTypes'
-import {firestore} from '../../firebase'
+import {firebase, firestore} from '../../data/firebase'
+import {history} from '../../data/history'
 
 
-export const addNotetoStore = (note) => ({
+export const addNotetoStore = (note, id) => ({
   type: actionTypes.ADD_NOTE,
   payload: {
+    id,
     title: note.title,
     body: note.body,
     createdAt: note.createdAt,
@@ -15,7 +17,10 @@ export const addNotetoStore = (note) => ({
 export const addNote = (note) => {
   return dispatch => {
     firestore.collection('notes').add(note)
-      .then(docRef => dispatch(addNotetoStore(note, docRef.id)))
+      .then(docRef => {
+        dispatch(addNotetoStore(note, docRef.id))
+        history.push(`/notes/view/${docRef.id}`)
+        })
   }
 }
 
@@ -44,7 +49,10 @@ export const editNoteInStore = note => ({
 export const editNote = (note) => {
   return dispatch => {
     firestore.collection('notes').doc(note.id).set(note)
-      .then(() => dispatch(editNoteInStore(note))) 
+      .then(() => {
+        dispatch(editNoteInStore(note))
+        history.push(`/notes/view/${note.id}`)
+      }) 
   }
 }
 
@@ -53,10 +61,11 @@ export const setNotesToStore = (notes) => ({
   payload: notes,
 })
 
-export const setNotes = () => {
+export const setNotes = (user) => {
   return dispatch => {
     const notes = []
-     firestore.collection('notes').get()
+    // const currentUser = firebase.auth().currentUser
+     firestore.collection('notes').where("createdBy", "==", user).get()
       .then(querySnapshot => {
         querySnapshot.forEach(item => {
           const noteBody = item.data()
@@ -70,3 +79,7 @@ export const setNotes = () => {
       .then(() => dispatch(setNotesToStore(notes)))
   }
 }
+
+export const cleanNotes = () => ({
+  type: actionTypes.CLEAN_NOTES
+})

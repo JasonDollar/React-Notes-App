@@ -2,6 +2,7 @@ export const ADD_NOTE = 'ADD_NOTE'
 export const REMOVE_NOTE = 'REMOVE_NOTE'
 export const EDIT_NOTE = 'EDIT_NOTE'
 export const SET_NOTES = 'SET_NOTES'
+export const CLEAN_NOTES = 'CLEAN_NOTES'
 
 
 export const LOGIN = 'SET_NOTES'

@@ -32,7 +32,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         uid: '',
         error: '',
-        userData: {}
+        userData: null
       }
     case actionTypes.SET_USER_DATA: 
       return {

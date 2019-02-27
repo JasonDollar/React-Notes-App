@@ -3,12 +3,11 @@ import {connect} from 'react-redux'
 
 import {Redirect} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux'
+
 
 import ActionButton from '../styles/ActionButton'
 import DetailContainer from '../styles/DetailContainer'
-
+import * as actions from '../../store/actions'
 // import classes from './AddNote.module.scss'
 
 class EditNote extends Component {
@@ -20,7 +19,6 @@ class EditNote extends Component {
     createdAt: '',
   }
   componentDidMount = () => {
-    console.log(this.props.firestore)
     if ((this.props.match && this.props.match.params.id && this.props.notes)) {
       const noteToBeEdited = this.props.notes.find(item => item.id === this.props.match.params.id)
       console.log(noteToBeEdited)
@@ -47,17 +45,14 @@ class EditNote extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
-    const {firestore, history} = this.props
     const note = {
-      // id: this.state.id ? this.state.id : '',
+      id: this.state.id,
       title: this.state.title,
       body: this.state.body,
       editedAt: Date.now(),
-      // createdAt: this.state.createdAt ? this.state.createdAt : Date.now()
     }
+    this.props.editNote(note)
 
-    firestore.update({collection: 'notes'}, note)
-      .then(() => history.push(`/notes/view/${this.state.id}`) )
   }
   
   addNoteHandler = () => {}
@@ -90,18 +85,12 @@ class EditNote extends Component {
 }
 
 const mapStateToProps = state => ({
-  notes: state.firestore.ordered.notes,
+  notes: state.notes,
   userId: state.auth.uid
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   addNote: (note) => dispatch(actions.addNote(note)),
-//   editNote: (note) => dispatch(actions.editNote(note))
-// })
+const mapDispatchToProps = dispatch => ({
+  editNote: (note) => dispatch(actions.editNote(note))
+})
 
-export default compose (
-  firestoreConnect(props => [
-    {collection: 'notes', doc: props.match.params.id}
-  ]),
-connect(mapStateToProps)
-)(EditNote)
+export default connect(mapStateToProps, mapDispatchToProps)(EditNote)

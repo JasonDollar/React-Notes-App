@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {signOut} from '../../store/actions'
+import {signOut, cleanNotes} from '../../store/actions'
 
 const HeaderContainer = styled.div`
   background: royalblue;
@@ -24,7 +24,7 @@ const HeaderContainer = styled.div`
   }
 `
 
-const Header = ({signOut, isAuth}) => {
+const Header = ({signOut, isAuth, cleanNotes}) => {
   return (
     <HeaderContainer>
       <header className="container">
@@ -32,7 +32,10 @@ const Header = ({signOut, isAuth}) => {
         <Link to="/notes">Home</Link>
         {!isAuth ? <Link to="/signin">Sign In</Link> : null}
         {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
-        {isAuth ? <button onClick={signOut}>Sign Out</button> : null}
+        {isAuth ? <button onClick={() => {
+          signOut()
+          cleanNotes()
+        }}>Sign Out</button> : null}
       </header>
     </HeaderContainer>
   )
@@ -42,7 +45,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToprops = dispatch => ({
-  signOut: () => dispatch(signOut())
+  signOut: () => dispatch(signOut()),
+  cleanNotes: () => dispatch(cleanNotes())
 })
 
 export default connect(mapStateToProps, mapDispatchToprops)(Header)

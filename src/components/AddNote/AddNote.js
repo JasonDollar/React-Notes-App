@@ -3,12 +3,11 @@ import {connect} from 'react-redux'
 // import {Redirect} from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux'
+
 
 import ActionButton from '../styles/ActionButton'
 import DetailContainer from '../styles/DetailContainer'
-
+import * as actions from '../../store/actions'
 
 // import classes from './AddNote.module.scss'
 
@@ -18,6 +17,11 @@ class AddNote extends Component {
     body: '',
     editedAt: '',
     createdAt: '',
+  }
+  componentDidMount = () => {
+    if (!this.props.user) {
+      this.props.history.push('/notes')
+    }
   }
   
 
@@ -30,19 +34,15 @@ class AddNote extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
-    const {firestore} = this.props
     const note = {
       title: this.state.title,
       body: this.state.body,
       editedAt: Date.now(),
       createdAt: Date.now(),
-      createdBy: this.props.user ? this.props.user : ''
+      createdBy: this.props.user 
     }
-    firestore.add({collection: `notes`}, note)
-      .then((docRef) => {
-        this.props.history.push(`/notes/view/${docRef.id}`)
-      })
 
+    this.props.addNote(note)
     
   }
   
@@ -54,7 +54,7 @@ class AddNote extends Component {
         <div className="content">
           <ActionButton onClick={() => {
             if (this.state.id) {
-              this.props.history.push(`/notes/${this.state.id}`)
+              this.props.history.push(`/notes/view/${this.state.id}`)
             } else {
               this.props.history.push('/notes') 
             }
@@ -80,14 +80,10 @@ const mapStateToProps = state => ({
   user: state.auth.uid
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   addNote: (note) => dispatch(actions.addNote(note)),
-//   editNote: (note) => dispatch(actions.editNote(note))
-// })
+const mapDispatchToProps = dispatch => ({
+  addNote: (note) => dispatch(actions.addNote(note)),
+})
 
-export default compose (
-  firestoreConnect(),
-connect(mapStateToProps)
-)(AddNote)
+export default connect(mapStateToProps, mapDispatchToProps)(AddNote)
 
-// export default firestoreConnect()(AddNote)
+
