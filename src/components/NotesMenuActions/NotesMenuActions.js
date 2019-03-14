@@ -11,7 +11,7 @@ const NotesMenuActions = ({setFilter, setSortBy, dropdownValue}) => {
   return (
     <div className={classes.Menu}>
       <NavLink to="/notes/create" style={{margin: 0}}>
-        <ActionButton width="100%"><FontAwesomeIcon icon="plus" />{' '}Create new</ActionButton> 
+        <ActionButton type="button" width="100%"><FontAwesomeIcon icon="plus" />{' '}Create new</ActionButton> 
       </NavLink>
 
       <div style={{position: 'relative', fontSize: '1.4rem', color: '#777'}}>

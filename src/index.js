@@ -33,7 +33,7 @@ ReactDOM.render(app, document.getElementById('root'));
 
 
 firebase.auth().onAuthStateChanged(function(user) {
-  console.log(user)
+  // console.log(user)
   if (user) {
     store.dispatch(getUserUid(user.uid))
     store.dispatch(getUserData(user.uid))

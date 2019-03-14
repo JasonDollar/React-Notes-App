@@ -21,7 +21,7 @@ class EditNote extends Component {
   componentDidMount = () => {
     if ((this.props.match && this.props.match.params.id && this.props.notes)) {
       const noteToBeEdited = this.props.notes.find(item => item.id === this.props.match.params.id)
-      console.log(noteToBeEdited)
+      // console.log(noteToBeEdited)
       if (noteToBeEdited) {
         this.setState({
           id: noteToBeEdited.id,
@@ -65,7 +65,7 @@ class EditNote extends Component {
       return (
         <DetailContainer className="active">
           <div className="content">
-            <ActionButton onClick={() => { this.props.history.push(`/notes/view/${this.state.id}`) }}>
+            <ActionButton type="button" onClick={this.props.history.goBack}>
             <FontAwesomeIcon icon="arrow-left" />
             {' '}Go back
             </ActionButton>

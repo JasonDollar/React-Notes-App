@@ -25,7 +25,7 @@ const ListItem = styled.li`
   }
 `
 
-const NotesListItem = ({note, toggleNoteDetail, isActive, setActiveClassId}) => {
+const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
   const {title, body, id, createdAt} = note
   let notesBody
 
@@ -43,7 +43,6 @@ const NotesListItem = ({note, toggleNoteDetail, isActive, setActiveClassId}) => 
     >
       <Link to={`/notes/view/${id}`} onClick={() => {
         toggleNoteDetail()
-        setActiveClassId(id)
       }} >
 
         <h3>{title}</h3>

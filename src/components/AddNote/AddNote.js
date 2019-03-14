@@ -49,16 +49,11 @@ class AddNote extends Component {
   addNoteHandler = () => {}
 
   render() {
+    console.log(this.props.history)
     return (
       <DetailContainer className="active">
         <div className="content">
-          <ActionButton onClick={() => {
-            if (this.state.id) {
-              this.props.history.push(`/notes/view/${this.state.id}`)
-            } else {
-              this.props.history.push('/notes') 
-            }
-          }}>
+          <ActionButton type="button" onClick={this.props.history.goBack}>
             <FontAwesomeIcon icon="arrow-left" />
             {' '}Go back
           </ActionButton>
