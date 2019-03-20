@@ -1,40 +1,40 @@
-.main {
-  // display: flex;
-  // flex-direction: column;
+// .main {
+//   // display: flex;
+//   // flex-direction: column;
   
-  // margin-top: 2rem;
-  background: white;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transform: translateX(100%);
-  word-break: break-all;
-  padding: 2rem;
-  // transition: all .8s ;
-    &.active {
-    transform: translateX(0);
-  }
-  @media (min-width: 766px) {
-    // align-self: start;
-    position: static;
-    margin: 0 2rem;
-    transform: translateX(0);
-  }
-  & .content {
-    position: static;
-    @media (min-width: 766px) {
-      position: sticky;
-      top: 2rem;
-      right: 0;
-      width: 100%;
-      transform: translateX(0);
-    }
-  }
+//   // margin-top: 2rem;
+//   // background: white;
+//   position: fixed;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 100;
+//   transform: translateX(100%);
+//   word-break: break-all;
+//   // padding: 1.5rem;
+//   // transition: all .8s ;
+//     &.active {
+//     transform: translateX(0);
+//   }
+//   @media (min-width: 766px) {
+//     // align-self: start;
+//     position: static;
+//     margin: 0 2rem;
+//     transform: translateX(0);
+//   }
+//   & .content {
+//     position: static;
+//     @media (min-width: 766px) {
+//       position: sticky;
+//       top: 2rem;
+//       right: 0;
+//       width: 100%;
+//       transform: translateX(0);
+//     }
+//   }
   
-}
+// }
 
 .onlyMobile {
   display: block;

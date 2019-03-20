@@ -25,9 +25,7 @@ class App extends Component {
     showNoteDetail : false,
     themeColor: 'light',
   }
-  // componentDidMount = () => {
-  //   // this.props.setNotes()
-  // }
+
   toggleNoteDetail = () => {
     this.setState(prevState => ({showNoteDetail: !prevState.showNoteDetail}))
   }
@@ -42,17 +40,13 @@ class App extends Component {
           <div className={`${classes.main} container`}>
             <Route 
             path="/notes" 
-            render={props => <NotesList {...props}  toggleNoteDetail={this.toggleNoteDetail}/>} 
+            component={NotesList} 
             />
             
             <Switch>
               <Route path="/" exact component={Welcome} />
               <Route path="/notes" exact component={NotesPlaceholder} />
-              <Route path="/notes/view/:id" render={props => (
-                <NoteDetail {...props} 
-                toggleNoteDetail={this.toggleNoteDetail} 
-                showNoteDetail={this.state.showNoteDetail}
-              />) } />
+              <Route path="/notes/view/:id" component={NoteDetail} />
               <Route path="/notes/edit/:id" component={EditNote} />
               <Route path="/notes/create" component={AddNote} />
               <Route path="/signup" component={SignUp} />

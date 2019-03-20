@@ -9,7 +9,7 @@ const DetailContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 100;
-  margin: 0 1rem;
+  /* margin: 0 1rem; */
   /* padding-top: 4rem; */
   transform: translateX(100%);
   word-break: break-all;
@@ -24,7 +24,7 @@ const DetailContainer = styled.div`
   }
   & .content {
     position: static;
-    padding: 1rem 2rem;
+    padding: 1rem;
     @media (min-width: 766px) {
       position: sticky;
       top: 5rem;

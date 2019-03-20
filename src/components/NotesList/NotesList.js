@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
+import {history} from '../../data/history'
 import {filterNotesInOrder} from '../../helpers'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
-import {history} from '../../data/history'
+
 
 import classes from './NotesList.module.scss'
 
 
-
-const NotesList = ({notes, toggleNoteDetail}) => {
+const NotesList = ({notes}) => {
   const [activeNoteId] =  history.location.pathname.split('/').filter(item => item.length > 9)
-  // console.log(activeNoteId)
+
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
   // const [activeClassId, setActiveClassId] = useState(activeNoteId)
@@ -25,7 +25,6 @@ const NotesList = ({notes, toggleNoteDetail}) => {
     const value = e.target.value
     setSortBy(value)
   }
-  
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
   
@@ -37,9 +36,7 @@ const NotesList = ({notes, toggleNoteDetail}) => {
             <NotesListItem 
               key={item.id} 
               note={item} 
-              toggleNoteDetail={toggleNoteDetail} 
               isActive={activeNoteId === item.id} 
-              // setActiveClassId={setActiveClassId}
             />)
           )}
       </ul>
@@ -47,12 +44,8 @@ const NotesList = ({notes, toggleNoteDetail}) => {
   )
 }
 
-
 const mapStateToProps = state => ({
   notes: state.notes
 })
-
-
-
 
 export default connect(mapStateToProps)(NotesList)

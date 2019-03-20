@@ -8,8 +8,11 @@ const ListItem = styled.li`
   outline: none;
   border: none;
   border-bottom: 1px solid ${props => props.theme.lightGrey};
-  padding: 0 1rem;
+  @media (max-width: 767px) {
+    padding: 2px 0;
+    }
 
+  /* &.hover, */
   &.active {
     @media (min-width: 767px) {
       background-color: ${props => props.theme.lightGrey};
@@ -19,9 +22,14 @@ const ListItem = styled.li`
 
   & a:link,
   & a:visited {
+    display: block;
+    height: 100%;
+    border-radius: 0;
     outline: 0;
     color: inherit;
     text-decoration: none;
+    padding: 1rem;
+    &,& > * {margin: 0;}
   }
 `
 
@@ -41,15 +49,12 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
         active: isActive,
       })}
     >
-      <Link to={`/notes/view/${id}`} onClick={() => {
-        toggleNoteDetail()
-      }} >
+      <Link to={`/notes/view/${id}`} >
 
         <h3>{title}</h3>
         <p>{notesBody}</p>
         <p>{moment(createdAt).format('LLL')}</p>
    
-        
       </Link>
     </ListItem>
   )

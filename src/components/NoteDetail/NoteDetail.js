@@ -5,18 +5,12 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styled from 'styled-components'
-import classNames from 'classnames'
-
-
 
 import ActionButton from '../styles/ActionButton'
 import DetailContainer from '../styles/DetailContainer'
 import * as actions from '../../store/actions'
 
 import classes from './NoteDetail.module.scss'
-
-
 
 const NoteDetail = (props) => {
   const [isActive, setActive] = useState(false)
@@ -36,19 +30,13 @@ const NoteDetail = (props) => {
   } else {
     return <Redirect to="/notes" />
   }
- 
-
-
   
   if (note) {
     return (
-      <DetailContainer className={isActive? 'active' : ''}>
+      <DetailContainer className={isActive ? 'active' : ''}>
         <main className="content">
           <div className={classes.onlyMobile}>
-            <ActionButton onClick={() => {
-              props.toggleNoteDetail()
-              props.history.push('/notes')
-            }}>
+            <ActionButton onClick={() => props.history.push('/notes') }>
               <FontAwesomeIcon icon="arrow-left" />{' '}Go back
             </ActionButton>
           </div>
@@ -74,9 +62,9 @@ const NoteDetail = (props) => {
 const mapStateToProps = state => ({
   notes: state.notes
 })
+
 const mapDispatchToProps = dispatch => ({
   removeNote: (id) => dispatch(actions.removeNote(id))
 })
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(NoteDetail)

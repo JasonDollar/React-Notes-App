@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import DetailContainer from '../styles/DetailContainer'
+import Spinner from '../styles/Spinner'
 
 
 const Container = styled.main`
@@ -16,6 +17,7 @@ const NotesPlaceholder = () => {
     <Container>
       <DetailContainer>
         Note Placeholder
+        <Spinner />
       </DetailContainer>
     </Container>
   )

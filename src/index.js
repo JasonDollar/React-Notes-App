@@ -35,9 +35,9 @@ ReactDOM.render(app, document.getElementById('root'));
 firebase.auth().onAuthStateChanged(function(user) {
   // console.log(user)
   if (user) {
+    store.dispatch(setNotes(user.uid))
     store.dispatch(getUserUid(user.uid))
     store.dispatch(getUserData(user.uid))
-    store.dispatch(setNotes(user.uid))
     // User is signed in.
   } else {
     // No user is signed in.
