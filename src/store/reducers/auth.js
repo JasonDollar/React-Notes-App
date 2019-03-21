@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes'
 const initialState = {
   uid: '',
   error: '',
-  userData: {}
+  userData: {},
+  firebaseProcessing: true
 }
 
 const authReducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.AUTH_SUCCESS:
       return {
         ...state,
-        error: ''
+        error: '',
+        firebaseProcessing: false
       }
     
     case actionTypes.AUTH_FAILURE:
@@ -25,7 +27,8 @@ const authReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         uid: '',
-        userData: {}
+        userData: {},
+        firebaseProcessing: false
       }
     case actionTypes.SIGNOUT_SUCCESS: 
       return {

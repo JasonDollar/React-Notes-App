@@ -11,7 +11,8 @@ import './index.css';
 import {firebase} from './data/firebase'
 import store from './store'
 import App from './App';
-import {getUserUid, getUserData, authFailure, setNotes, cleanNotes} from './store/actions'
+import * as actions from './store/actions'
+// import {getUserUid, getUserData, authFailure, setNotes, cleanNotes, authSuccess} from './store/actions'
 import {history} from './data/history'
 
 
@@ -33,15 +34,17 @@ ReactDOM.render(app, document.getElementById('root'));
 
 
 firebase.auth().onAuthStateChanged(function(user) {
-  // console.log(user)
+  // console.log(user.providerData.forEach(item => console.log(item)))
   if (user) {
-    store.dispatch(setNotes(user.uid))
-    store.dispatch(getUserUid(user.uid))
-    store.dispatch(getUserData(user.uid))
+    store.dispatch(actions.setNotes(user.uid))
+    store.dispatch(actions.getUserUid(user.uid))
+    store.dispatch(actions.getUserData(user.uid))
+    store.dispatch(actions.authSuccess())
     // User is signed in.
   } else {
+    console.log('lol')
     // No user is signed in.
-    // store.dispatch(authFailure())
+    store.dispatch(actions.authFailure())
     // store.dispatch(cleanNotes())
   }
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -24,24 +24,41 @@ const HeaderContainer = styled.div`
   }
 `
 
-const Header = ({signOut, isAuth, cleanNotes}) => {
+const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
+  console.log(firebaseProcessing)
+
+  const renderLinks = () => {
+    if (firebaseProcessing === false) {
+      return (
+        <Fragment>
+        <Link to="/notes">Home</Link>
+            {!isAuth ? <Link to="/signin">Sign In</Link> : null}
+            {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
+            {isAuth ? <button onClick={() => {
+              signOut()
+              cleanNotes()
+            }}>Sign Out</button> : null}
+            </Fragment>
+      )
+    } else {
+      
+      return <div></div>
+
+    }
+  }
+
   return (
     <HeaderContainer>
       <header className="container">
         Header
-        <Link to="/notes">Home</Link>
-        {!isAuth ? <Link to="/signin">Sign In</Link> : null}
-        {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
-        {isAuth ? <button onClick={() => {
-          signOut()
-          cleanNotes()
-        }}>Sign Out</button> : null}
+        {renderLinks()}
       </header>
     </HeaderContainer>
   )
 }
 const mapStateToProps = state => ({
-  isAuth: !!state.auth.uid
+  isAuth: !!state.auth.uid,
+  firebaseProcessing: state.auth.firebaseProcessing
 })
 
 const mapDispatchToprops = dispatch => ({

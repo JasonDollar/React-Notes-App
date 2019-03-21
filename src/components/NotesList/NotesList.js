@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 import {history} from '../../data/history'
 import {filterNotesInOrder} from '../../helpers'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
-
+import Spinner from '../styles/Spinner'
 
 import classes from './NotesList.module.scss'
 
 
-const NotesList = ({notes}) => {
+const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   const [activeNoteId] =  history.location.pathname.split('/').filter(item => item.length > 9)
 
   const [filter, setFilter] = useState('')
@@ -27,6 +28,12 @@ const NotesList = ({notes}) => {
   }
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy)
+  if (firebaseProcessing) {
+    return <Spinner />
+  }
+  if (!isAuth) {
+    return <Redirect to="/signin" />
+  }
   
   return (
     <aside className={classes.NotesList}>
@@ -45,7 +52,9 @@ const NotesList = ({notes}) => {
 }
 
 const mapStateToProps = state => ({
-  notes: state.notes
+  notes: state.notes,
+  firebaseProcessing: state.auth.firebaseProcessing,
+  isAuth: !!state.auth.uid,
 })
 
 export default connect(mapStateToProps)(NotesList)

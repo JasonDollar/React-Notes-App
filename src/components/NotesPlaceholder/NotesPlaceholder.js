@@ -17,7 +17,6 @@ const NotesPlaceholder = () => {
     <Container>
       <DetailContainer>
         Note Placeholder
-        <Spinner />
       </DetailContainer>
     </Container>
   )
