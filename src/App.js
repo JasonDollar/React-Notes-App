@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import {Route, Switch } from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faArrowRight, faSearch} from '@fortawesome/free-solid-svg-icons'
 
 import classes from './App.module.scss'
 
@@ -17,7 +17,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import {theme} from './components/styles/theme'
 
-library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faSearch)
+library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faArrowRight, faSearch)
 
 
 class App extends Component {

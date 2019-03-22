@@ -12,7 +12,6 @@ import {firebase} from './data/firebase'
 import store from './store'
 import App from './App';
 import * as actions from './store/actions'
-// import {getUserUid, getUserData, authFailure, setNotes, cleanNotes, authSuccess} from './store/actions'
 import {history} from './data/history'
 
 
@@ -42,7 +41,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     store.dispatch(actions.authSuccess())
     // User is signed in.
   } else {
-    console.log('lol')
+    console.log('no user')
     // No user is signed in.
     store.dispatch(actions.authFailure())
     // store.dispatch(cleanNotes())

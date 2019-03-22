@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {history} from '../../data/history'
 import {filterNotesInOrder} from '../../helpers'
 import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 import Spinner from '../styles/Spinner'
+import ActionButton from '../styles/ActionButton'
 
 import classes from './NotesList.module.scss'
 
@@ -17,6 +19,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
   const [page, setPage] = useState(1)
+  const notesPerPage = 9
 
   //set active page when sorting changes or new note is added 
   useEffect(() => {
@@ -25,7 +28,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
       return
     }
     if (noteIndex > -1) {
-      const notePage = Math.ceil((noteIndex + 1) / 10)
+      const notePage = Math.ceil((noteIndex + 1) / notesPerPage)
       setPage(notePage)
     } 
   }, [activeNoteId, sortBy, action])
@@ -41,8 +44,8 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   }
 
   const processedNotes = filterNotesInOrder(notes, filter, sortBy, page)
-  const sliceStart = page * 10 - 10
-  const paginatedNotes = processedNotes.slice(sliceStart, sliceStart + 10)
+  const sliceStart = page * notesPerPage - notesPerPage
+  const paginatedNotes = processedNotes.slice(sliceStart, sliceStart + notesPerPage)
 
   if (firebaseProcessing) {
     return <Spinner />
@@ -64,8 +67,12 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
           )}
       </ul>
       <div className={classes.paginationButtons}>
-        <button onClick={() => setPage(page - 1)} disabled={page < 2} >Previous</button>
-        <button onClick={() => setPage(page + 1)} disabled={notes.length / page <= 10} >Next</button>
+        <ActionButton onClick={() => setPage(page - 1)} disabled={page < 2}>
+          <FontAwesomeIcon icon="arrow-left" />{' '}Previous
+        </ActionButton>
+        <ActionButton onClick={() => setPage(page + 1)} disabled={processedNotes.length / page <= 10} >
+        Next{' '}<FontAwesomeIcon icon="arrow-right" />
+        </ActionButton>
       </div>
     </aside>
   )

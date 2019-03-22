@@ -11,6 +11,11 @@ const ActionButton = styled.button`
   /* margin: .5rem; */
   margin-left: 0;
   width: ${props => props.width ? props.width : ''};
+
+  &:disabled {
+    filter: grayscale(80%) brightness(1.2);
+    cursor: not-allowed;
+  }
 `
 
 export default ActionButton
