@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
@@ -12,11 +12,24 @@ import classes from './NotesList.module.scss'
 
 
 const NotesList = ({notes, firebaseProcessing, isAuth}) => {
-  const [activeNoteId] =  history.location.pathname.split('/').filter(item => item.length > 9)
+  let [action, activeNoteId] =  history.location.pathname.split('/').filter(item => item.length > 9 || item.length === 4)
 
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
-  // const [activeClassId, setActiveClassId] = useState(activeNoteId)
+  const [page, setPage] = useState(1)
+
+  //set active page when sorting changes or new note is added 
+  useEffect(() => {
+    const noteIndex = processedNotes.findIndex(item => item.id === activeNoteId)
+    if (action === 'edit') {
+      return
+    }
+    if (noteIndex > -1) {
+      const notePage = Math.ceil((noteIndex + 1) / 10)
+      setPage(notePage)
+    } 
+  }, [activeNoteId, sortBy, action])
+
 
   const textFilterHandler = e => {
     const value = e.target.value
@@ -27,7 +40,10 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
     setSortBy(value)
   }
 
-  const processedNotes = filterNotesInOrder(notes, filter, sortBy)
+  const processedNotes = filterNotesInOrder(notes, filter, sortBy, page)
+  const sliceStart = page * 10 - 10
+  const paginatedNotes = processedNotes.slice(sliceStart, sliceStart + 10)
+
   if (firebaseProcessing) {
     return <Spinner />
   }
@@ -39,7 +55,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
     <aside className={classes.NotesList}>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
       <ul className={classes.list}>
-        {processedNotes && processedNotes.map(item => (
+        {paginatedNotes && paginatedNotes.map(item => (
             <NotesListItem 
               key={item.id} 
               note={item} 
@@ -47,6 +63,10 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
             />)
           )}
       </ul>
+      <div className={classes.paginationButtons}>
+        <button onClick={() => setPage(page - 1)} disabled={page < 2} >Previous</button>
+        <button onClick={() => setPage(page + 1)} disabled={notes.length / page <= 10} >Next</button>
+      </div>
     </aside>
   )
 }

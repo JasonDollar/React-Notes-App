@@ -25,7 +25,7 @@ class AddNote extends Component {
   }
   
 
-  onInputChange = e => {
+  onInputChange = e => { 
     const elementName =  e.target.name
     const elementValue = e.target.value
 
@@ -49,7 +49,7 @@ class AddNote extends Component {
   addNoteHandler = () => {}
 
   render() {
-    console.log(this.props.history)
+    // console.log(this.props.history)
     return (
       <DetailContainer className="active">
         <div className="content">

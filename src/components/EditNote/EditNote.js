@@ -17,17 +17,20 @@ class EditNote extends Component {
     body: '',
     editedAt: '',
     createdAt: '',
+    // createdBy: ''
   }
   componentDidMount = () => {
     if ((this.props.match && this.props.match.params.id && this.props.notes)) {
       const noteToBeEdited = this.props.notes.find(item => item.id === this.props.match.params.id)
       // console.log(noteToBeEdited)
       if (noteToBeEdited) {
+        console.log(noteToBeEdited)
         this.setState({
           id: noteToBeEdited.id,
           title: noteToBeEdited.title,
           body: noteToBeEdited.body,
-          createdAt: noteToBeEdited.createdAt
+          createdAt: noteToBeEdited.createdAt,
+          // createdBy: noteToBeEdited.createdBy
         })
       } else {
         this.props.history.push('/notes')

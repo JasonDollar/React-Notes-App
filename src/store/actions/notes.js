@@ -48,7 +48,7 @@ export const editNoteInStore = note => ({
 
 export const editNote = (note) => {
   return dispatch => {
-    firestore.collection('notes').doc(note.id).set(note)
+    firestore.collection('notes').doc(note.id).update(note)
       .then(() => {
         dispatch(editNoteInStore(note))
         history.push(`/notes/view/${note.id}`)
@@ -69,7 +69,7 @@ export const setNotes = (user) => {
       .then(querySnapshot => {
         querySnapshot.forEach(item => {
           const noteBody = item.data()
-          // console.log(noteBody, item.id)
+          console.log(noteBody, item.id)
           notes.push({
             ...noteBody,
             id: item.id,
