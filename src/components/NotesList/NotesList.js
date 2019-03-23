@@ -19,7 +19,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
   const [page, setPage] = useState(1)
-  const notesPerPage = 9
+  const notesPerPage = 7
 
   //set active page when sorting changes or new note is added 
   useEffect(() => {

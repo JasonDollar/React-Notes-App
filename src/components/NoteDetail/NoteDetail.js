@@ -34,17 +34,17 @@ const NoteDetail = (props) => {
   if (note) {
     return (
       <DetailContainer className={isActive ? 'active' : ''}>
-        <main className="content">
+        <main className={classes.content}>
           <div className={classes.onlyMobile}>
             <ActionButton onClick={() => props.history.push('/notes') }>
               <FontAwesomeIcon icon="arrow-left" />{' '}Go back
             </ActionButton>
           </div>
           <p>Details:</p>
-          <h1>{note.title}</h1>
-          <h3>{note.body}</h3>
-          <p>Created: {moment(note.createdAt).format('LLL')}</p>
-          <p>Last edited: {moment(note.editedAt).fromNow()}</p>
+          <h2 className={classes.title}>{note.title}</h2>
+          <p className={classes.body}>{note.body}</p>
+          <p className={classes.created}>Created: {moment(note.createdAt).format('LLL')}</p>
+          <p className={classes.edited}>Last edited: {moment(note.editedAt).fromNow()}</p>
           <Link to={`/notes/edit/${note.id}`} style={{display: 'inlineBlock', width: '50%'}}>
             <ActionButton>
               <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>

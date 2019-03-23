@@ -29,7 +29,17 @@ const ListItem = styled.li`
     color: inherit;
     text-decoration: none;
     padding: 1rem;
-    &,& > * {margin: 0;}
+    /* &,& > * {margin: 0;} */
+  }
+
+  .header, .note {
+    margin: 1rem 0;
+  }
+
+  .time {
+    font-style: italic;
+    font-size: 1.4rem;
+    color: ${props => props.theme.fontColorGrey}
   }
 `
 
@@ -51,9 +61,9 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
     >
       <Link to={`/notes/view/${id}`} >
 
-        <h3>{title}</h3>
-        <p>{notesBody}</p>
-        <p>{moment(createdAt).format('LLL')}</p>
+        <h3 className="header">{title}</h3>
+        <p className="note">{notesBody}</p>
+        <p className="time">{moment(createdAt).format('LLL')}</p>
    
       </Link>
     </ListItem>

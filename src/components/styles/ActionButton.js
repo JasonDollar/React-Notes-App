@@ -7,7 +7,7 @@ const ActionButton = styled.button`
   border: 1px solid white;
   border-radius: 5px;
   background: ${props => props.type === 'danger' ? props.theme.danger : props.theme.info};
-  padding: .5rem 2rem;
+  padding: .5rem 1.6rem;
   /* margin: .5rem; */
   margin-left: 0;
   width: ${props => props.width ? props.width : ''};

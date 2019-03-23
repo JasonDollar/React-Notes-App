@@ -13,7 +13,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 4rem;
   /* line-height: 2; */
-  & .container {
+  & .header {
     display: flex;
     align-items: center;
     height: 100%;
@@ -49,7 +49,7 @@ const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
 
   return (
     <HeaderContainer>
-      <header className="container">
+      <header className="header">
         Header
         {renderLinks()}
       </header>
