@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {signIn} from '../../store/actions'
 
+import AuthForm from '../styles/AuthForm'
+
 const Login = ({signIn, isAuth}) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
@@ -10,16 +12,27 @@ const Login = ({signIn, isAuth}) => {
     return <Redirect to="/notes" />
   } else {
     return (
-      <div>
-        <form onSubmit={e => {
-          e.preventDefault()
-          signIn(email, password)
-        }}>
-          email:<input type="email" value={email} onChange={e => changeEmail(e.target.value)}/>
-          <input type="password" value={password} onChange={e => changePassword(e.target.value)}/>
-          <button type="submit">Sub</button>
-        </form>
-      </div>
+      <AuthForm>
+          <form onSubmit={e => {
+            e.preventDefault()
+            signIn(email, password)
+          }} className="form">
+
+            <h1 className="form__name">Sign In</h1>
+
+            <div className="inputGroup">
+              <label htmlFor="email">Email:</label>
+              <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)}/>
+            </div>
+
+            <div className="inputGroup">
+              <label htmlFor="password">Password:</label>
+              <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
+            </div>
+
+            <button type="submit" className="form__button">Sign In</button>
+          </form>
+      </AuthForm>
     )
   }
 }

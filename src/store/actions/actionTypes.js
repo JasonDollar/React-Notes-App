@@ -7,6 +7,7 @@ export const CLEAN_NOTES = 'CLEAN_NOTES'
 
 export const LOGIN = 'SET_NOTES'
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS'
+export const AUTH_START = 'AUTH_START'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_FAILURE = 'AUTH_FAILURE'
 

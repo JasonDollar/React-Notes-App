@@ -29,6 +29,10 @@ const getUserDataError = err => ({
   payload: err
 })
 
+export const startLogin = () => ({
+  type: actionTypes.AUTH_START
+})
+
 export const getUserData = (uid) => {
   return dispatch => {
     firestore.collection('users').doc(uid).get()
@@ -45,6 +49,7 @@ export const getUserData = (uid) => {
 
 export const signUp = newUser => {
   return dispatch => {
+    dispatch(startLogin())
     firebase.auth().createUserWithEmailAndPassword(
       newUser.email,
       newUser.password
@@ -64,6 +69,7 @@ export const signUp = newUser => {
 
 export const signIn = (email, password )=> {
   return dispatch => {
+    dispatch(startLogin())
     firebase.auth().signInWithEmailAndPassword(
       email,
       password

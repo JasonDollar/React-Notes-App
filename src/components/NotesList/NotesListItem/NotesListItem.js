@@ -45,12 +45,17 @@ const ListItem = styled.li`
 
 const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
   const {title, body, id, createdAt} = note
-  let notesBody
+  let notesBody, notesTitle
 
   if (body.length > 32) {
     notesBody = body.substring(0, 32) + '...'
   } else {
     notesBody = body
+  }
+  if (title.length > 32) {
+    notesTitle = title.substring(0, 30) + '...'
+  } else {
+    notesTitle = title
   }
 
   return (
@@ -61,7 +66,7 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
     >
       <Link to={`/notes/view/${id}`} >
 
-        <h3 className="header">{title}</h3>
+        <h3 className="header">{notesTitle}</h3>
         <p className="note">{notesBody}</p>
         <p className="time">{moment(createdAt).format('LLL')}</p>
    

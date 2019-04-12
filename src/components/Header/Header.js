@@ -17,10 +17,13 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
-  }
-  & .container > * {
-    margin-right: 2rem;
-    color: #fff;
+    max-width: 104rem;
+    margin: 0 auto;
+    padding: 1rem;
+    & > * {
+      margin-right: 2rem;
+      color: #fff;
+    }
   }
 `
 
@@ -31,14 +34,14 @@ const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
     if (firebaseProcessing === false) {
       return (
         <Fragment>
-        <Link to="/notes">Home</Link>
-            {!isAuth ? <Link to="/signin">Sign In</Link> : null}
-            {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
-            {isAuth ? <button onClick={() => {
-              signOut()
-              cleanNotes()
-            }}>Sign Out</button> : null}
-            </Fragment>
+          <Link to="/notes">Home</Link>
+          {!isAuth ? <Link to="/signin">Sign In</Link> : null}
+          {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
+          {isAuth ? <button onClick={() => {
+            signOut()
+            cleanNotes()
+          }}>Sign Out</button> : null}
+        </Fragment>
       )
     } else {
       
@@ -50,7 +53,9 @@ const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
   return (
     <HeaderContainer>
       <header className="header">
-        Header
+        <span>
+          Notes
+        </span>
         {renderLinks()}
       </header>
     </HeaderContainer>

@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom'
 // import {firebaseConnect} from 'react-redux-firebase'
 // import {firebase} from '../../firebase'
 import {signUp} from '../../store/actions'
+import AuthForm from '../styles/AuthForm'
 
 class SignUp extends React.Component {
   state = {
@@ -30,22 +31,33 @@ class SignUp extends React.Component {
       return <Redirect to="/notes" />
     }
     return (
-      <div>
-        <form onSubmit={this.formSubmitHandler}>
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" onChange={this.inputchangeHandler} value={this.state.firstName}/>
-          <label htmlFor="lastName">Last Name</label>
+      <AuthForm>
+        <form className="form" onSubmit={this.formSubmitHandler}>
+        <h1 className="form__name">Sign Up</h1>
+
+        <div className="inputGroup">
+        <label htmlFor="firstName">First Name</label>
+        <input type="text" id="firstName" onChange={this.inputchangeHandler} value={this.state.firstName}/>
+        </div>
+
+        <div className="inputGroup">
+        <label htmlFor="lastName">Last Name</label>
           <input type="text" id="lastName" onChange={this.inputchangeHandler} value={this.state.lastName}/>
-  
-          <label htmlFor="email">Email</label>
+        </div>
+
+        <div className="inputGroup">
+        <label htmlFor="email">Email</label>
           <input type="email" id="email" onChange={this.inputchangeHandler} value={this.state.email}/>
-  
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" onChange={this.inputchangeHandler} value={this.state.password}/>
+        </div>
+
+        <div className="inputGroup">
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" onChange={this.inputchangeHandler} value={this.state.password}/>
+        </div>
         
-          <button type="submit">Sign up</button>
+          <button type="submit" className="form__button">Sign up</button>
         </form>
-      </div>
+      </AuthForm>
     )
   }
 }

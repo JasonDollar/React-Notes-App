@@ -15,6 +15,12 @@ const authReducer = (state = initialState, action) => {
         uid: action.payload,
         error: ''
       }
+    case actionTypes.AUTH_START: 
+      return {
+        ...state,
+        error: '',
+        firebaseProcessing: true,
+      }
     case actionTypes.AUTH_SUCCESS:
       return {
         ...state,

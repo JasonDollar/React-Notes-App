@@ -1,0 +1,47 @@
+.container {
+  background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3)), url('/images/bg_small.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-x: 53%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  @media (min-width: 360px) {
+    background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3)), url('/images/bg_big.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 53%;
+  }
+  @media (min-width: 576px) {
+    background-position: center;
+  }
+}
+
+.Form {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  transform: translateY(-2rem);
+}
+
+.formName {
+  margin-top: 0;
+  font-size: 4rem;
+  @media (min-width: 576px) {
+    font-size: 5rem;
+  }
+}
+
+.inputGroup {
+  font-size: 2rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 576px) {
+    font-size: 3rem;
+  }
+  
+}
