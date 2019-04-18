@@ -5,7 +5,10 @@ export const SET_NOTES = 'SET_NOTES'
 export const CLEAN_NOTES = 'CLEAN_NOTES'
 
 
-export const LOGIN = 'SET_NOTES'
+export const LOGIN = 'LOGIN'
+export const RESET_PASSWORD = 'RESET_PASSWORD'
+export const RESET_SUCCESS = 'RESET_SUCCESS'
+export const RESET_FAILURE = 'RESET_FAILURE'
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS'
 export const AUTH_START = 'AUTH_START'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'

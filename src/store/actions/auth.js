@@ -88,3 +88,9 @@ export const signOut = () => {
       .catch(err => dispatch(authFailure(err)))
   }
 }
+
+export const resetPassword = (email) => dispatch => {
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(() => dispatch({type: actionTypes.RESET_SUCCESS}))
+    .catch((err) => dispatch({type: actionTypes.RESET_FAILURE, payload: err}))
+}

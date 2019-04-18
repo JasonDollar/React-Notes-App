@@ -34,7 +34,8 @@ const AuthForm = styled.div`
   }
 
   .form__name {
-    margin-top: 0;
+    margin: 0;
+    margin-bottom: 1.5rem;
     font-size: 4rem;
     @media (min-width: 576px) {
       font-size: 5rem;
@@ -67,6 +68,32 @@ const AuthForm = styled.div`
     cursor: pointer;
     width: 100%;
   }
+  .form__link--container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form__link {
+    display: block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    padding-bottom: .3rem;
+    color :${props => props.theme.fontColorGrey};
+    text-decoration: none;
+    text-align: center;
+    border-bottom: 1px solid transparent;
+  }
+  .form__link:hover {
+    border-bottom: 1px solid ${props => props.theme.fontColorGrey};
+
+    /* text-decoration: underline; */
+  }
+  .errorMessage {
+    display: block;
+    margin: 1rem 0;
+    color :${props => props.theme.fontColorGrey};
+  }
+  
 `
 
 export default AuthForm

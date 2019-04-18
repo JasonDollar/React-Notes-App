@@ -25,7 +25,8 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        firebaseProcessing: false
+        firebaseProcessing: false,
+        passwordReset: false,
       }
     
     case actionTypes.AUTH_FAILURE:
@@ -41,7 +42,8 @@ const authReducer = (state = initialState, action) => {
         ...state,
         uid: '',
         error: '',
-        userData: null
+        userData: null,
+        passwordReset: false,
       }
     case actionTypes.SET_USER_DATA: 
       return {
@@ -53,6 +55,18 @@ const authReducer = (state = initialState, action) => {
         ...state,
         userData: {},
         error: action.payload
+      }
+    case actionTypes.RESET_SUCCESS: 
+      return {
+        ...state,
+        error: '',
+        passwordReset: true,
+      }
+    case actionTypes.RESET_FAILURE: 
+      return {
+        ...state,
+        error: action.payload,
+        passwordReset: false,
       }
     default:
       return state

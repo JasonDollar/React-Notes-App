@@ -13,5 +13,6 @@ export {
   getUserUid,
   getUserData,
   authFailure,
-  authSuccess
+  authSuccess,
+  resetPassword
 } from './auth'

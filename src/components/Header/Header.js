@@ -24,6 +24,9 @@ const HeaderContainer = styled.div`
       margin-right: 2rem;
       color: #fff;
     }
+    & a {
+      text-decoration: none;
+    }
   }
 `
 

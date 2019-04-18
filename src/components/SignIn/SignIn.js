@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {signIn} from '../../store/actions'
 
 import AuthForm from '../styles/AuthForm'
 
-const Login = ({signIn, isAuth}) => {
+const Login = ({signIn, isAuth, error}) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
   if (isAuth) {
@@ -29,15 +29,21 @@ const Login = ({signIn, isAuth}) => {
               <label htmlFor="password">Password:</label>
               <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
             </div>
+            {error && <span className="errorMessage">{error.message}</span> }
 
             <button type="submit" className="form__button">Sign In</button>
+            <div className="form__link--container">
+              <Link to="/signup" className="form__link">New User? Create an account</Link>
+              <Link to="/reset" className="form__link">Forgot your password?</Link>
+            </div>
           </form>
       </AuthForm>
     )
   }
 }
 const mapStateToProps = state => ({
-  isAuth: !!state.auth.uid
+  isAuth: !!state.auth.uid,
+  error: state.auth.error
 })
 
 const mapDispatchToProps = dispatch => ({
