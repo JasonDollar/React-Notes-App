@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {signOut, cleanNotes} from '../../store/actions'
+import ActionButton from '../styles/ActionButton'
 
 const HeaderContainer = styled.div`
   background: royalblue;
@@ -16,17 +17,42 @@ const HeaderContainer = styled.div`
   & .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     max-width: 104rem;
     margin: 0 auto;
     padding: 1rem;
-    & > * {
-      margin-right: 2rem;
-      color: #fff;
-    }
-    & a {
-      text-decoration: none;
-    }
+    color: #fff;
+    font-size: 2rem;
+  }
+  & .appName {
+    color: inherit;
+    text-decoration: none;
+    font-size: 2.4rem;
+    margin-right: 2rem;
+    line-height: 1;
+  }
+`
+
+const SignOut = styled.button`
+  background: none;
+  border:none;
+  color: inherit;
+  
+`
+
+const Links = styled.div`
+  & .link {
+    color: inherit;
+    text-decoration: none;
+    margin-right: 2rem;
+  }
+  
+  & .links-exp {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
 
@@ -36,15 +62,16 @@ const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
   const renderLinks = () => {
     if (firebaseProcessing === false) {
       return (
-        <Fragment>
-          <Link to="/notes">Home</Link>
-          {!isAuth ? <Link to="/signin">Sign In</Link> : null}
-          {!isAuth ? <Link to="/signup">Sign UP</Link> : null}
-          {isAuth ? <button onClick={() => {
+        <Links className={isAuth ? 'links-exp' : ''}>
+          
+          
+          {!isAuth ? <Link to="/signin" className="link">Sign In</Link> : null}
+          {!isAuth ? <Link to="/signup" className="link">Sign Up</Link> : null}
+          {isAuth ? <SignOut type="danger" onClick={() => {
             signOut()
             cleanNotes()
-          }}>Sign Out</button> : null}
-        </Fragment>
+          }}>Sign Out</SignOut> : null}
+        </Links>
       )
     } else {
       
@@ -56,9 +83,9 @@ const Header = ({signOut, isAuth, cleanNotes,firebaseProcessing}) => {
   return (
     <HeaderContainer>
       <header className="header">
-        <span>
-          Notes
-        </span>
+        <Link className="appName" to='/notes'>
+          NotesLite
+        </Link>
         {renderLinks()}
       </header>
     </HeaderContainer>

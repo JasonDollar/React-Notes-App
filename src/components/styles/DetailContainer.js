@@ -3,6 +3,9 @@ import styled from 'styled-components'
 const DetailContainer = styled.div`
   background: ${props => props.theme.background};
   color: ${props => props.theme.fontColor};
+  min-height: 100%;
+
+
   position: fixed;
   top: 4rem;
   bottom: 0;
@@ -12,7 +15,8 @@ const DetailContainer = styled.div`
   /* margin: 0 1rem; */
   /* padding-top: 4rem; */
   transform: translateX(100%);
-  word-break: break-all;
+  word-break: ${props => props.break === 'nobreak' ? 'normal' : 'break-all'};
+  
   /* transition: all .8s ; */
     &.active {
     transform: translateX(0);

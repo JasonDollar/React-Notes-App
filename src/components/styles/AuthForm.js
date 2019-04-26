@@ -93,6 +93,16 @@ const AuthForm = styled.div`
     margin: 1rem 0;
     color :${props => props.theme.fontColorGrey};
   }
+
+  .testAccount {
+    /* display: inline-block; */
+    font-size: 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    background: none;
+    border: none;
+    color: black;
+  }
   
 `
 

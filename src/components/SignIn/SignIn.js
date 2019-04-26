@@ -8,6 +8,12 @@ import AuthForm from '../styles/AuthForm'
 const Login = ({signIn, isAuth, error}) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
+  
+  const previewAccountHandler = () => {
+    changeEmail('qwe@qwe.qwe')
+    changePassword('qweqwe')
+  }
+
   if (isAuth) {
     return <Redirect to="/notes" />
   } else {
@@ -33,6 +39,7 @@ const Login = ({signIn, isAuth, error}) => {
 
             <button type="submit" className="form__button">Sign In</button>
             <div className="form__link--container">
+              <button className="testAccount" onClick={previewAccountHandler}>Use Preview Account</button>
               <Link to="/signup" className="form__link">New User? Create an account</Link>
               <Link to="/reset" className="form__link">Forgot your password?</Link>
             </div>
