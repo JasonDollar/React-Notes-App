@@ -5,7 +5,7 @@ import {resetPassword} from '../../store/actions'
 
 import AuthForm from '../styles/AuthForm'
 
-const ResetPassword = ({resetPassword, isAuth, passwordReset, resetError}) => {
+const ResetPassword = ({resetPasswordAction, isAuth, passwordReset, resetError}) => {
   const [email, changeEmail] = useState('')
   if (isAuth) {
     return <Redirect to="/notes" />
@@ -14,7 +14,7 @@ const ResetPassword = ({resetPassword, isAuth, passwordReset, resetError}) => {
       <AuthForm>
           <form onSubmit={e => {
             e.preventDefault()
-            resetPassword(email)
+            resetPasswordAction(email)
           }} className="form">
 
             <h1 className="form__name">Reset Password</h1>
@@ -25,7 +25,7 @@ const ResetPassword = ({resetPassword, isAuth, passwordReset, resetError}) => {
             </div> 
 
 
-            <button type="submit" className="form__button">Sign In</button>
+            <button type="submit" className="form__button">Reset</button>
             {resetError ? <span className="errorMessage">{resetError.message}</span>  : null}
           </form>
       </AuthForm>
@@ -39,7 +39,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  resetPassword: (email) => dispatch(resetPassword(email))
+  resetPasswordAction: (email) => dispatch(resetPassword(email))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)

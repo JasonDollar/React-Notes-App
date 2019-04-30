@@ -38,7 +38,7 @@ const SignOut = styled.button`
   background: none;
   border:none;
   color: inherit;
-  
+  cursor: pointer;
 `
 
 const Links = styled.div`

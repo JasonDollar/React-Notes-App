@@ -29,7 +29,7 @@ const NotesPlaceholder = () => {
     <Container>
         <Content>
           <h3 className="heading">
-            Choose the note from the list on the left
+            Choose a note from the list on the left
           </h3>
         </Content>
     </Container>

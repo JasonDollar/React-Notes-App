@@ -1,14 +1,23 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styled from 'styled-components'
+
 import ActionButton from '../styles/ActionButton'
 import FilterInput from '../styles/FilterInput'
 
-import classes from './NotesMenuActions.module.scss'
+// import classes from './NotesMenuActions.module.scss'
+
+const Menu = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+`
 
 const NotesMenuActions = ({setFilter, setSortBy, dropdownValue}) => {
   return (
-    <div className={classes.Menu}>
+    <Menu>
       <NavLink to="/notes/create" style={{margin: 0}}>
         <ActionButton type="button" width="100%"><FontAwesomeIcon icon="plus" />{' '}Create new</ActionButton> 
       </NavLink>
@@ -33,7 +42,7 @@ const NotesMenuActions = ({setFilter, setSortBy, dropdownValue}) => {
           <option value="editedDesc">Edited Desc</option>
         </select>
       </div>
-    </div>
+    </Menu>
   )
 }
 

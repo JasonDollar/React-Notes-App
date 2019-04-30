@@ -17,5 +17,6 @@ export const filterNotesInOrder = (notes, textFilter, sortBy) => {
         return b.editedAt -  a.editedAt
       }
     })
-  } else return []
+  } 
+  return []
 }

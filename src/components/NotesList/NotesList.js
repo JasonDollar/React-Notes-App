@@ -9,8 +9,9 @@ import NotesListItem from './NotesListItem/NotesListItem'
 import NotesMenuActions from '../NotesMenuActions/NotesMenuActions'
 import Spinner from '../styles/Spinner'
 import ActionButton from '../styles/ActionButton'
+import NoteList from '../styles/NoteList'
 
-import classes from './NotesList.module.scss'
+// import classes from './NotesList.module.scss'
 
 
 const NotesList = ({notes, firebaseProcessing, isAuth}) => {
@@ -55,9 +56,9 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   }
   
   return (
-    <aside className={classes.NotesList}>
+    <NoteList>
       <NotesMenuActions setFilter={textFilterHandler} setSortBy={dropdownSortHandler} dropdownValue={sortBy}/>
-      <ul className={classes.list}>
+      <ul className="list">
         {paginatedNotes && paginatedNotes.map(item => (
             <NotesListItem 
               key={item.id} 
@@ -66,7 +67,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
             />)
           )}
       </ul>
-      <div className={classes.paginationButtons}>
+      <div className="paginationButtons">
         <ActionButton onClick={() => setPage(page - 1)} disabled={page < 2}>
           <FontAwesomeIcon icon="arrow-left" />{' '}Previous
         </ActionButton>
@@ -74,7 +75,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
         Next{' '}<FontAwesomeIcon icon="arrow-right" />
         </ActionButton>
       </div>
-    </aside>
+    </NoteList>
   )
 }
 

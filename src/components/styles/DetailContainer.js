@@ -27,14 +27,31 @@ const DetailContainer = styled.div`
     transform: translateX(0);
   }
   & .content {
-    position: static;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 4rem;
+    -webkit-overflow-scrolling: touch;
+    z-index: 150;
     padding: 1rem;
+    overflow-y: scroll;
     @media (min-width: 766px) {
       position: sticky;
-      top: 5rem;
+      top: 4rem;
       right: 0;
       width: 100%;
       transform: translateX(0);
+      overflow-y: visible;
+    }
+  }
+  & .content.form {
+    @media (max-width: 766px) {
+      
+      max-height: calc(100vh - 5rem);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
   }
 `
