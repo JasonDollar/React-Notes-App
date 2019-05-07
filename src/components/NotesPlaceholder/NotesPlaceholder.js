@@ -31,6 +31,9 @@ const NotesPlaceholder = () => {
           <h3 className="heading">
             Choose a note from the list on the left
           </h3>
+          <p>placki <br />
+          placki
+          placki</p>
         </Content>
     </Container>
   )

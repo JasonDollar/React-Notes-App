@@ -47,10 +47,12 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
   const {title, body, id, createdAt} = note
   let notesBody, notesTitle
 
-  if (body.length > 32) {
-    notesBody = body.substring(0, 32) + '...'
-  } else {
-    notesBody = body
+  notesBody = JSON.parse(body).split('\n')[0]
+  // console.log(notesBody)
+  // console.log(body)
+
+  if (notesBody.length > 32) {
+    notesBody = notesBody.substring(0, 32) + '...'
   }
   if (title.length > 32) {
     notesTitle = title.substring(0, 30) + '...'

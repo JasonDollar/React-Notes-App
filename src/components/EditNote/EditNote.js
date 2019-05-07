@@ -29,7 +29,7 @@ class EditNote extends Component {
         this.setState({
           id: noteToBeEdited.id,
           title: noteToBeEdited.title,
-          body: noteToBeEdited.body,
+          body: JSON.parse(noteToBeEdited.body),
           createdAt: noteToBeEdited.createdAt,
           // createdBy: noteToBeEdited.createdBy
         })
@@ -38,6 +38,15 @@ class EditNote extends Component {
       }
     }
   }
+
+  onEnterKeyPress = e => {
+    if (e.key === 'Enter' || e.code === 'Enter' || e.which === 13) {
+      this.setState(prev => ({body: prev.body + ' /n '}))
+    } 
+    console.log(e.which)
+    return
+    
+  }
   
 
   onInputChange = e => {
@@ -45,6 +54,7 @@ class EditNote extends Component {
     const elementValue = e.target.value
 
     this.setState({[elementName]: elementValue})
+    console.log((this.state.body))
   }
 
   onFormSubmit = e => {
@@ -52,14 +62,13 @@ class EditNote extends Component {
     const note = {
       id: this.state.id,
       title: this.state.title,
-      body: this.state.body,
+      body: JSON.stringify(this.state.body),
       editedAt: Date.now(),
     }
     this.props.editNote(note)
 
   }
   
-  addNoteHandler = () => {}
 
   render() {
     if (!this.props.notes) {
@@ -84,7 +93,7 @@ class EditNote extends Component {
                 name="title" 
               />
               <div className="note__body--container">
-                <textarea className="note__body" id="body" onChange={this.onInputChange} value={this.state.body} name="body"></textarea>
+                <textarea className="note__body" id="body" onChange={this.onInputChange} value={this.state.body.replace('/n', '')} name="body"></textarea>
               </div>
               <ActionButton type="submit" className="note__button">
                 <span className="icon"><FontAwesomeIcon icon="save" />{' '}Save note</span>

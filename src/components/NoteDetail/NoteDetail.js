@@ -25,16 +25,23 @@ const NoteDetail = (props) => {
 
   useEffect(() => {
     setActive(true)
+    // console.log(document.querySelector('#body').innerHTML)
 
     return () => {
       setActive(false)
     }
   }, [])
 
-  let note
+  let note, noteBody
   if (props.notes) {
     const filtered = props.notes.filter(item => item.id === props.match.params.id)
     note = filtered[0]
+    // console.log(note)
+    // console.log(JSON.parse(note.body))
+    // console.log(note.body.replace('"', ''))
+    noteBody = JSON.parse(note.body).split('\n')
+    // noteBody = [note.body]
+    // console.log(noteBody)
   } else {
     return <Redirect to="/notes" />
   }
@@ -50,7 +57,7 @@ const NoteDetail = (props) => {
           </OnlyMobile>
           <p>Details:</p>
           <h2>{note.title}</h2>
-          <p>{note.body}</p>
+          <article>{noteBody.map(item => <p>{item}</p> )}</article>
           <p>Created: {moment(note.createdAt).format('LLL')}</p>
           <p>Last edited: {moment(note.editedAt).fromNow()}</p>
           <Link to={`/notes/edit/${note.id}`} style={{display: 'inlineBlock', width: '50%'}}>

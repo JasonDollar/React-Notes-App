@@ -37,7 +37,7 @@ class AddNote extends Component {
     e.preventDefault();
     const note = {
       title: this.state.title,
-      body: this.state.body,
+      body: JSON.stringify(this.state.body),
       editedAt: Date.now(),
       createdAt: Date.now(),
       createdBy: this.props.user 
