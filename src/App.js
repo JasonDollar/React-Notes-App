@@ -49,11 +49,11 @@ class App extends Component {
               <Route path="/notes/view/:id" component={NoteDetail} />
               <Route path="/notes/edit/:id" component={EditNote} />
               <Route path="/notes/create" component={AddNote} />
-              </Switch>
-              </div>
-            <Route path="/signup" exact component={SignUp} />
-            <Route path="/signin" exact component={SignIn} />
-            <Route path="/reset" exact component={ResetPassword} />
+            </Switch>
+          </div>
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/signin" exact component={SignIn} />
+          <Route path="/reset" exact component={ResetPassword} />
         </Fragment>
       </ThemeProvider>
     );

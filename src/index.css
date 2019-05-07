@@ -10,7 +10,6 @@ body {
   font-size: 1.6rem;
   /* min-height: 100vh; */
   overflow-x: hidden;
-  min-height: 100vh;
 }
 @media (min-width: 766px) {
   body {
@@ -18,9 +17,6 @@ body {
   }
 } 
 
-#root {
-  min-height: 100vh;
-}
 
 html {
   font-size: 62.5%;

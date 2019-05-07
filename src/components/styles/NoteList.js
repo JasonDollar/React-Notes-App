@@ -39,6 +39,7 @@ const NoteList = styled.aside`
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
+    margin: 1rem 0;
     @media (max-width: 576px) {
       padding: 1.5rem 0;
     }

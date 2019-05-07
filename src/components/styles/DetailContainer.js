@@ -72,12 +72,21 @@ const DetailContainer = styled.div`
       position: static;
       transform: translateY(0);
     }
+    @media (min-width: 576px) and (max-width: 768px) {
+      justify-content: flex-end;
+      position: static;
+      transform: translateY(0);
+      & .btn {
+        margin: 0;
+        margin-left: 1rem;
+      }
+    }
     
     & .details-text {
       color: ${props => props.theme.fontColorGrey};
       font-style: italic;
       margin-right: auto;
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         display: none;
       }
     }

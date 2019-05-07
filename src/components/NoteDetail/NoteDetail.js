@@ -35,11 +35,15 @@ const NoteDetail = (props) => {
   let note, noteBody
   if (props.notes) {
     const filtered = props.notes.filter(item => item.id === props.match.params.id)
+    if (filtered.length === 0) {
+      props.history.push('/notes')
+      
+    }
     note = filtered[0]
     // console.log(note)
     // console.log(JSON.parse(note.body))
     // console.log(note.body.replace('"', ''))
-    noteBody = JSON.parse(note.body).split('\n')
+    noteBody = note && note.body && JSON.parse(note.body).split('\n')
     // noteBody = [note.body]
     // console.log(noteBody)
   } else {
@@ -48,7 +52,7 @@ const NoteDetail = (props) => {
   
   if (note) {
     return (
-      <DetailContainer className={isActive ? 'active' : ''}>
+      <DetailContainer className="active">
         <main className="content">
           <OnlyMobile>
             <ActionButton onClick={() => props.history.push('/notes') }>
@@ -67,12 +71,12 @@ const NoteDetail = (props) => {
             </ActionButton>
           </div>
 
-          <h2 class="note-title">{note.title}</h2>
+          <h2 className="note-title">{note.title}</h2>
 
           <p className="details">Created: {moment(note.createdAt).format('LLL')}</p>
           <p className="details">Last edited: {moment(note.editedAt).fromNow()}</p>
 
-          <article className="note-body">{noteBody.map(item => <p className="note-paragraph">{item}</p> )}</article>
+          <article className="note-body">{noteBody && noteBody.map(item => <p className="note-paragraph">{item}</p> )}</article>
    
           
         </main>

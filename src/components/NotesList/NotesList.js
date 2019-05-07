@@ -15,14 +15,14 @@ import NoteList from '../styles/NoteList'
 
 
 const NotesList = ({notes, firebaseProcessing, isAuth}) => {
-  let [action, activeNoteId] =  history.location.pathname.split('/').filter(item => item.length > 9 || item.length === 4)
+  let [action, activeNoteId] = history.location.pathname.split('/').filter(item => item.length > 9 || item.length === 4)
 
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('createdAsc')
   const [page, setPage] = useState(1)
   const notesPerPage = 7
 
-  //set active page when sorting changes or new note is added 
+  //set proper active page when sorting changes or new note is added 
   useEffect(() => {
     const noteIndex = processedNotes.findIndex(item => item.id === activeNoteId)
     if (action === 'edit') {
@@ -71,7 +71,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
         <ActionButton onClick={() => setPage(page - 1)} disabled={page < 2}>
           <FontAwesomeIcon icon="arrow-left" />{' '}Previous
         </ActionButton>
-        <ActionButton onClick={() => setPage(page + 1)} disabled={processedNotes.length / page <= 10} >
+        <ActionButton onClick={() => setPage(page + 1)} disabled={processedNotes.length / page <= notesPerPage} >
         Next{' '}<FontAwesomeIcon icon="arrow-right" />
         </ActionButton>
       </div>
