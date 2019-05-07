@@ -55,19 +55,26 @@ const NoteDetail = (props) => {
               <FontAwesomeIcon icon="arrow-left" />{' '}Go back
             </ActionButton>
           </OnlyMobile>
-          <p>Details:</p>
-          <h2>{note.title}</h2>
-          <article>{noteBody.map(item => <p>{item}</p> )}</article>
-          <p>Created: {moment(note.createdAt).format('LLL')}</p>
-          <p>Last edited: {moment(note.editedAt).fromNow()}</p>
-          <Link to={`/notes/edit/${note.id}`} style={{display: 'inlineBlock', width: '50%'}}>
-            <ActionButton>
-              <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+          <div className="controls">
+            <span className="details-text">Details:</span>
+            <Link to={`/notes/edit/${note.id}`}  className="btn">
+              <ActionButton width="100%">
+                <span className="icon"><FontAwesomeIcon icon="edit"/>Edit note</span>
+              </ActionButton>
+            </Link>
+            <ActionButton type="danger" onClick={() => props.removeNote(note.id) } className="btn">
+              <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
             </ActionButton>
-          </Link>
-          <ActionButton type="danger" onClick={() => props.removeNote(note.id) }>
-            <span><FontAwesomeIcon icon="trash-alt"/>{' '}Delete Note</span>
-          </ActionButton>
+          </div>
+
+          <h2 class="note-title">{note.title}</h2>
+
+          <p className="details">Created: {moment(note.createdAt).format('LLL')}</p>
+          <p className="details">Last edited: {moment(note.editedAt).fromNow()}</p>
+
+          <article className="note-body">{noteBody.map(item => <p className="note-paragraph">{item}</p> )}</article>
+   
+          
         </main>
       </DetailContainer>
     )

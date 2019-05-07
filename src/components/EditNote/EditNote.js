@@ -25,7 +25,7 @@ class EditNote extends Component {
       const noteToBeEdited = this.props.notes.find(item => item.id === this.props.match.params.id)
       // console.log(noteToBeEdited)
       if (noteToBeEdited) {
-        console.log(noteToBeEdited)
+        // console.log(noteToBeEdited)
         this.setState({
           id: noteToBeEdited.id,
           title: noteToBeEdited.title,
@@ -37,15 +37,6 @@ class EditNote extends Component {
         this.props.history.push('/notes')
       }
     }
-  }
-
-  onEnterKeyPress = e => {
-    if (e.key === 'Enter' || e.code === 'Enter' || e.which === 13) {
-      this.setState(prev => ({body: prev.body + ' /n '}))
-    } 
-    console.log(e.which)
-    return
-    
   }
   
 
@@ -77,30 +68,30 @@ class EditNote extends Component {
 
       return (
         <DetailContainer className="active">
-          <div className="content">
-            <ActionButton type="button" onClick={this.props.history.goBack}>
-              <FontAwesomeIcon icon="arrow-left" />
-              {' '}Go back
+        <div className="content form">
+          <ActionButton type="button" onClick={this.props.history.goBack}>
+            <FontAwesomeIcon icon="arrow-left" />
+            {' '}Go back
+          </ActionButton>
+          
+          <NoteForm onSubmit={this.onFormSubmit}>
+            <input 
+              className="note__title"
+              type="text" 
+              value={this.state.title} 
+              onChange={this.onInputChange} 
+              id="title" 
+              name="title"
+            />
+            <div className="note__body--container">
+              <textarea className="note__body" id="body" onChange={this.onInputChange} value={this.state.body} name="body"></textarea>
+            </div>
+            <ActionButton type="submit" className="note__button">
+              <span className="icon"><FontAwesomeIcon icon="save" />{' '}Save note</span>
             </ActionButton>
-            
-            <NoteForm onSubmit={this.onFormSubmit}>
-              <input 
-                className="note__title"
-                type="text" 
-                value={this.state.title} 
-                onChange={this.onInputChange} 
-                id="title" 
-                name="title" 
-              />
-              <div className="note__body--container">
-                <textarea className="note__body" id="body" onChange={this.onInputChange} value={this.state.body.replace('/n', '')} name="body"></textarea>
-              </div>
-              <ActionButton type="submit" className="note__button">
-                <span className="icon"><FontAwesomeIcon icon="save" />{' '}Save note</span>
-              </ActionButton>
-            </NoteForm>
-          </div>
-        </DetailContainer>
+          </NoteForm>
+        </div>
+      </DetailContainer>
       )
     }
   }
@@ -116,3 +107,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditNote)
+// .replace('/n', '')

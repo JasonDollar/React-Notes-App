@@ -54,6 +54,65 @@ const DetailContainer = styled.div`
       height: 100%;
     }
   }
+
+  & .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: .5rem;
+    padding-bottom: 1.5rem;
+    transform: translateY(-4rem);
+    @media (min-width: 576px) {
+      position: static;
+      transform: translateY(0);
+    }
+    
+    & .details-text {
+      color: ${props => props.theme.fontColorGrey};
+      font-style: italic;
+      margin-right: auto;
+      @media (max-width: 576px) {
+        display: none;
+      }
+    }
+    & .btn {
+      margin: 0 1rem;
+      @media (max-width: 576px) {
+        margin: 0;
+        flex: 0 0 45%;
+      }
+
+    }
+  }
+
+  & .note-title {
+    margin: 1.5rem 0;
+    font-size: 3.2rem;
+  }
+
+  & .note-body {
+    & .note-paragraph {
+      margin: 1.2rem 0;
+      font-size: 2rem;
+    }
+  }
+
+  & .details {
+    margin: .5rem 0;
+    color: ${props => props.theme.fontColorGrey};
+    font-style: italic;
+    font-size: 1.2rem;
+
+    @media (min-width: 576px) {
+      font-size: 1.2rem;
+    }
+  }
 `
 
 export default DetailContainer
