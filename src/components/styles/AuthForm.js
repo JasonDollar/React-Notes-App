@@ -81,7 +81,7 @@ const AuthForm = styled.div`
     color :${props => props.theme.fontColorGrey};
     text-decoration: none;
     text-align: center;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid transparent; 
   }
   .form__link:hover {
     border-bottom: 1px solid ${props => props.theme.fontColorGrey};

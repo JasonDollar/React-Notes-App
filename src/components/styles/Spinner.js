@@ -35,7 +35,7 @@ const round = keyframes`
 `
 
 const Spinner = styled.div`
-  color: ${props => props.theme.danger};
+  color: ${props => props.theme.confirm};
   font-size: 90px;
   text-indent: -9999em;
   overflow: hidden;

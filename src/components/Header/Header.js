@@ -6,7 +6,7 @@ import {signOut, cleanNotes} from '../../store/actions'
 import ActionButton from '../styles/ActionButton'
 
 const HeaderContainer = styled.div`
-  background: royalblue;
+  background: ${props => props.theme.confirm};
   position: fixed;
   top: 0;
   left: 0;

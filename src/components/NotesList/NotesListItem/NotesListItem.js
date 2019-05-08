@@ -32,7 +32,7 @@ const ListItem = styled.li`
   }
 
   .header, .note {
-    margin: 1rem 0;
+    margin: .5rem 0 1rem 0;
   }
 
   .time {

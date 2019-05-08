@@ -9,7 +9,7 @@ export const notes = [
   }, {
     id: "LEV5BAh2hwb9fh2kFepM2",
     title: "Second note",
-    body: "Second note body",
+    body: "Second note body", 
     createdAt: 1557310812414,
     editedAt: 1557310812414,
     createdBy: "hxwM4zaAB5dmY9ifx6yx32ND5de2",
