@@ -3,8 +3,7 @@ import {Route, Switch, Redirect } from 'react-router-dom'
 import {ThemeProvider} from 'styled-components'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faArrowRight, faSearch} from '@fortawesome/free-solid-svg-icons'
-
-import classes from './App.module.scss'
+import styled from 'styled-components'
 
 import AddNote from './components/AddNote/AddNote'
 import EditNote from './components/EditNote/EditNote'
@@ -18,6 +17,17 @@ import ResetPassword from './components/ResetPassword/ResetPassword'
 import {theme} from './components/styles/theme'
 
 library.add(faPlus, faSave, faEdit, faTrashAlt, faArrowLeft, faArrowRight, faSearch)
+
+const Main = styled.div`
+    margin-top: 4rem;
+  @media (min-width: 767px) {
+    display: grid;
+    grid-template-columns: [list-start] 32rem [list-end] 1fr [note-end];
+    /* grid-template-rows: 1fr;
+    grid-template-areas: "list note"
+    overflow-y: hidden; */
+  }
+`
 
 
 class App extends Component {
@@ -37,7 +47,7 @@ class App extends Component {
         <Fragment>
           <Header />
 
-          <div className={`${classes.main} container`}>
+          <Main className="container">
             <Route 
             path="/notes" 
             component={NotesList} 
@@ -50,7 +60,7 @@ class App extends Component {
               <Route path="/notes/edit/:id" component={EditNote} />
               <Route path="/notes/create" component={AddNote} />
             </Switch>
-          </div>
+          </Main>
           <Route path="/signup" exact component={SignUp} />
           <Route path="/signin" exact component={SignIn} />
           <Route path="/reset" exact component={ResetPassword} />

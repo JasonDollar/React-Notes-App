@@ -24,7 +24,7 @@ export const setUser = (userData) => ({
   payload: userData
 })
 
-const getUserDataError = err => ({
+export const getUserDataError = err => ({
   type: actionTypes.SET_USER_DATA_FAILURE,
   payload: err
 })

@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import moment from 'moment'
-import classNames from 'classnames'
 
 const ListItem = styled.li`
   outline: none;
@@ -62,9 +61,7 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
 
   return (
     <ListItem 
-      className={classNames({
-        active: isActive,
-      })}
+      className={isActive ? 'active' : ''}
     >
       <Link to={`/notes/view/${id}`} >
 

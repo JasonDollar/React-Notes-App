@@ -10,7 +10,8 @@ export const addNotetoStore = (note, id) => ({
     title: note.title,
     body: note.body,
     createdAt: note.createdAt,
-    editedAt: note.editedAt
+    editedAt: note.editedAt,
+    createdBy: note.createdBy
   },
 })
 

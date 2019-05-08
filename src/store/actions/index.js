@@ -3,7 +3,11 @@ export {
   removeNote,
   editNote,
   setNotes,
-  cleanNotes
+  cleanNotes,
+  addNotetoStore,
+  removeNoteInStore,
+  editNoteInStore,
+  setNotesToStore,
 } from './notes'
 
 export {
@@ -14,5 +18,9 @@ export {
   getUserData,
   authFailure,
   authSuccess,
-  resetPassword
+  resetPassword,
+  signOutSuccess,
+  setUser,
+  getUserDataError,
+  startLogin
 } from './auth'
