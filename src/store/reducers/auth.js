@@ -4,38 +4,39 @@ export const initialState = {
   uid: '',
   error: '',
   userData: {},
-  firebaseProcessing: true
+  firebaseProcessing: true,
+  passwordReset: false
 }
 
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
+    case actionTypes.AUTH_START: 
+    return {
+      ...state,
+      error: '',
+      firebaseProcessing: true,
+    }
+    case actionTypes.AUTH_SUCCESS:
+    return {
+      ...state,
+      error: '',
+      firebaseProcessing: false,
+      passwordReset: false,
+    }
+    
+    case actionTypes.AUTH_FAILURE:
+    return {
+      ...state,
+      error: action.payload,
+      uid: '',
+      userData: {},
+      firebaseProcessing: false
+    }
     case actionTypes.GET_USER_UID: 
       return {
         ...state,
         uid: action.payload,
         error: ''
-      }
-    case actionTypes.AUTH_START: 
-      return {
-        ...state,
-        error: '',
-        firebaseProcessing: true,
-      }
-    case actionTypes.AUTH_SUCCESS:
-      return {
-        ...state,
-        error: '',
-        firebaseProcessing: false,
-        passwordReset: false,
-      }
-    
-    case actionTypes.AUTH_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        uid: '',
-        userData: {},
-        firebaseProcessing: false
       }
     case actionTypes.SIGNOUT_SUCCESS: 
       return {
