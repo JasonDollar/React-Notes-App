@@ -1,7 +1,7 @@
 
 
-export const filterNotesInOrder = (notes, textFilter, sortBy) => {
-  if (notes) {
+export const filterNotesInOrder = (notes, textFilter = '', sortBy = 'createdAsc') => {
+  if (notes && Array.isArray(notes)) {
     return notes.filter(item => {
       const titleMatch = item.title.toLowerCase().includes(textFilter.toLowerCase().trim())
       const bodyMatch = item.body.toLowerCase().includes(textFilter.toLowerCase().trim())
