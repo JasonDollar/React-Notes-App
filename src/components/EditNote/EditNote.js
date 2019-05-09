@@ -48,7 +48,7 @@ class EditNote extends Component {
     console.log((this.state.body))
   }
 
-  onFormSubmit = e => {
+  onFormSubmit = async e => {
     e.preventDefault();
     const note = {
       id: this.state.id,
@@ -56,8 +56,8 @@ class EditNote extends Component {
       body: JSON.stringify(this.state.body),
       editedAt: Date.now(),
     }
-    this.props.editNote(note)
-
+    const edited = await this.props.editNote(note)
+    this.props.history.push(`/notes/view/${edited.payload.id}`)
   }
   
 

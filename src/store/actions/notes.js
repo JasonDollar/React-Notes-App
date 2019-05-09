@@ -17,10 +17,10 @@ export const addNotetoStore = (note, id) => ({
 
 export const addNote = (note) => {
   return dispatch => {
-    firestore.collection('notes').add(note)
+    return firestore.collection('notes').add(note)
       .then(docRef => {
-        dispatch(addNotetoStore(note, docRef.id))
-        history.push(`/notes/view/${docRef.id}`)
+        return dispatch(addNotetoStore(note, docRef.id))
+        
         })
   }
 }
@@ -32,7 +32,7 @@ export const removeNoteInStore = (id) => ({
 
 export const removeNote = id => {
   return dispatch => {
-    firestore.collection('notes').doc(id).delete()
+    return firestore.collection('notes').doc(id).delete()
       .then(() => dispatch(removeNoteInStore(id)))
   }
 }
@@ -49,11 +49,8 @@ export const editNoteInStore = note => ({
 
 export const editNote = (note) => {
   return dispatch => {
-    firestore.collection('notes').doc(note.id).update(note)
-      .then(() => {
-        dispatch(editNoteInStore(note))
-        history.push(`/notes/view/${note.id}`)
-      }) 
+    return firestore.collection('notes').doc(note.id).update(note)
+      .then(() => dispatch(editNoteInStore(note))) 
   }
 }
 
@@ -66,7 +63,7 @@ export const setNotes = (user) => {
   return dispatch => {
     const notes = []
     // const currentUser = firebase.auth().currentUser
-     firestore.collection('notes').where("createdBy", "==", user).get()
+     return firestore.collection('notes').where("createdBy", "==", user).get()
       .then(querySnapshot => {
         querySnapshot.forEach(item => {
           const noteBody = item.data()
@@ -75,6 +72,7 @@ export const setNotes = (user) => {
             ...noteBody,
             id: item.id,
           })
+          return notes
         })
       })
       .then(() => dispatch(setNotesToStore(notes)))

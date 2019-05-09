@@ -33,7 +33,7 @@ class AddNote extends Component {
     this.setState({[elementName]: elementValue})
   }
 
-  onFormSubmit = e => {
+  onFormSubmit = async e => {
     e.preventDefault();
     const note = {
       title: this.state.title,
@@ -43,8 +43,9 @@ class AddNote extends Component {
       createdBy: this.props.user 
     }
 
-    this.props.addNote(note)
-    
+    const saved = await this.props.addNote(note)
+    // console.log(res)
+    this.props.history.push(`/notes/view/${saved.payload.id}`)
   }
   
   addNoteHandler = () => {}
