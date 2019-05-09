@@ -35,11 +35,11 @@ export const startLogin = () => ({
 
 export const getUserData = (uid) => {
   return dispatch => {
-    firestore.collection('users').doc(uid).get()
+    return firestore.collection('users').doc(uid).get()
       .then((res) => {
         if (res.exists) {
           const userData = res.data()
-          dispatch(setUser(userData))
+          return dispatch(setUser(userData))
         }
       })
       .catch(err => dispatch(getUserDataError(err)))
@@ -50,7 +50,7 @@ export const getUserData = (uid) => {
 export const signUp = newUser => {
   return dispatch => {
     dispatch(startLogin())
-    firebase.auth().createUserWithEmailAndPassword(
+    return firebase.auth().createUserWithEmailAndPassword(
       newUser.email,
       newUser.password
     ).then((res) => {
@@ -60,22 +60,21 @@ export const signUp = newUser => {
         lastName: newUser.lastName
       })
     })
-    .then(() => {
-      dispatch(authSuccess())
-    })
+    .then(() =>  dispatch(authSuccess()))
     .catch(err => dispatch(authFailure(err)))
   }
 }
 
-export const signIn = (email, password )=> {
+export const signIn = (email, password) => {
   return dispatch => {
     dispatch(startLogin())
-    firebase.auth().signInWithEmailAndPassword(
+    return firebase.auth().signInWithEmailAndPassword(
       email,
       password
-    ).then((res) => {
-      dispatch(getUserUid(res.user.uid))
+    ).then(() => {
+      const user = firebase.auth().currentUser
       dispatch(authSuccess())
+      return dispatch(getUserUid(user.uid))
     })
     .catch(err => dispatch(authFailure(err)))
   }
@@ -83,14 +82,14 @@ export const signIn = (email, password )=> {
 
 export const signOut = () => {
   return dispatch => {
-    firebase.auth().signOut()
+    return firebase.auth().signOut()
       .then(() => dispatch(signOutSuccess()))
       .catch(err => dispatch(authFailure(err)))
   }
 }
 
 export const resetPassword = (email) => dispatch => {
-  firebase.auth().sendPasswordResetEmail(email)
+  return firebase.auth().sendPasswordResetEmail(email)
     .then(() => dispatch({type: actionTypes.RESET_SUCCESS}))
     .catch((err) => dispatch({type: actionTypes.RESET_FAILURE, payload: err}))
 }

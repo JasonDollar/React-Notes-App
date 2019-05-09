@@ -1,3 +1,6 @@
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import {firebase, firestore} from '../../data/firebase'
 import {
   signUp,
   signIn,
@@ -13,7 +16,9 @@ import {
   startLogin
 } from '../../store/actions'
 import * as actionTypes from '../../store/actions/actionTypes'
-import {uidTest, userDataTest, errorTest} from '../../data/fixtures/auth'
+import {uidTest, userDataTest, errorTest, userLoginDataTest} from '../../data/fixtures/auth'
+
+const createMockStore = configureMockStore([thunk])
 
 describe('auth actions - store', () => {
   test('auth success', () => {
@@ -61,5 +66,55 @@ describe('auth actions - store', () => {
     expect(action).toEqual({
       type: actionTypes.AUTH_START
     })
+  })
+})
+
+describe('auth actions - database',  () => {
+  test('get user data',async (done) => {
+    const store = createMockStore({})
+    await firestore.collection("users").doc(uidTest).set(userDataTest)
+    store.dispatch(getUserData(uidTest))
+      .then((data) => {
+        const actions = store.getActions()
+
+        expect(actions[0]).toEqual({
+          type: actionTypes.SET_USER_DATA,
+          payload: userDataTest
+        })
+        done()
+      })
+  })
+  test('sign in user and get its uid',async (done) => {
+    const store = createMockStore({})
+    const {email, password} = userLoginDataTest
+    store.dispatch(signIn(email, password))
+      .then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({type: actionTypes.AUTH_START})
+        expect(actions[1]).toEqual({type: actionTypes.AUTH_SUCCESS})
+        expect(actions[2]).toEqual({
+          type: actionTypes.GET_USER_UID,
+          payload: expect.any(String)
+        })
+        done()
+      })
+  })
+  test('sign out user',async (done) => {
+    const store = createMockStore({})
+    store.dispatch(signOut())
+      .then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({type: actionTypes.SIGNOUT_SUCCESS})
+        done()
+      })
+  })
+  test('reset user password',async (done) => {
+    const store = createMockStore({})
+    store.dispatch(resetPassword(userLoginDataTest.email))
+      .then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({type: actionTypes.RESET_SUCCESS})
+        done()
+      })
   })
 })

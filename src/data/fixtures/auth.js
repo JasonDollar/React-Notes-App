@@ -9,3 +9,8 @@ export const errorTest = {
   code: "err/test",
   message: "This is an example error"
 }
+
+export const userLoginDataTest = {
+  email: 'test@test.com',
+  password: 'testtest'
+}
