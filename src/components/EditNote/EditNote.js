@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-
 import {Redirect} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 import ActionButton from '../styles/ActionButton'
 import DetailContainer from '../styles/DetailContainer'
 import NoteForm from '../styles/NoteForm'
 import * as actions from '../../store/actions'
-// import classes from './AddNote.module.scss'
 
 class EditNote extends Component {
   state = {
@@ -23,9 +20,7 @@ class EditNote extends Component {
   componentDidMount = () => {
     if ((this.props.match && this.props.match.params.id && this.props.notes)) {
       const noteToBeEdited = this.props.notes.find(item => item.id === this.props.match.params.id)
-      // console.log(noteToBeEdited)
       if (noteToBeEdited) {
-        // console.log(noteToBeEdited)
         this.setState({
           id: noteToBeEdited.id,
           title: noteToBeEdited.title,

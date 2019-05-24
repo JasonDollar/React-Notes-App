@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-// import {Redirect} from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -9,8 +8,6 @@ import ActionButton from '../styles/ActionButton'
 import DetailContainer from '../styles/DetailContainer'
 import NoteForm from '../styles/NoteForm'
 import * as actions from '../../store/actions'
-
-// import classes from './AddNote.module.scss'
 
 class AddNote extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-import moment from 'moment'
+import {format} from 'date-fns'
 
 const ListItem = styled.li`
   outline: none;
@@ -67,7 +67,7 @@ const NotesListItem = ({note, toggleNoteDetail, isActive}) => {
 
         <h3 className="header">{notesTitle}</h3>
         <p className="note">{notesBody}</p>
-        <p className="time">{moment(createdAt).format('LLL')}</p>
+        <p className="time">{format(createdAt, 'Do MMM YYYY, H:mm')}</p>
    
       </Link>
     </ListItem>

@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import moment from 'moment'
-import 'moment/locale/en-gb'
+import {format, distanceInWordsToNow} from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 
@@ -73,8 +72,8 @@ const NoteDetail = (props) => {
 
           <h2 className="note-title">{note.title}</h2>
 
-          <p className="details">Created: {moment(note.createdAt).format('LLL')}</p>
-          <p className="details">Last edited: {moment(note.editedAt).fromNow()}</p>
+          <p className="details">Created: {format(note.createdAt, 'Do MMM YYYY, H:mm')}</p>
+          <p className="details">Last edited: {distanceInWordsToNow(note.editedAt)} ago</p>
 
           <article className="note-body">{noteBody && noteBody.map(item => <p className="note-paragraph">{item}</p> )}</article>
    

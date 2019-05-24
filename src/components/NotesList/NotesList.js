@@ -11,10 +11,8 @@ import Spinner from '../styles/Spinner'
 import ActionButton from '../styles/ActionButton'
 import NoteList from '../styles/NoteList'
 
-// import classes from './NotesList.module.scss'
 
-
-const NotesList = ({notes, firebaseProcessing, isAuth}) => {
+export const NotesList = ({notes, firebaseProcessing, isAuth}) => {
   let [action, activeNoteId] = history.location.pathname.split('/').filter(item => item.length > 9 || item.length === 4)
 
   const [filter, setFilter] = useState('')
@@ -44,7 +42,7 @@ const NotesList = ({notes, firebaseProcessing, isAuth}) => {
     setSortBy(value)
   }
 
-  const processedNotes = filterNotesInOrder(notes, filter, sortBy, page)
+  const processedNotes = filterNotesInOrder(notes, filter, sortBy)
   const sliceStart = page * notesPerPage - notesPerPage
   const paginatedNotes = processedNotes.slice(sliceStart, sliceStart + notesPerPage)
 

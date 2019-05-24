@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import ActionButton from '../styles/ActionButton'
 import FilterInput from '../styles/FilterInput'
 
-// import classes from './NotesMenuActions.module.scss'
-
 const Menu = styled.div`
   padding: 1rem;
   display: flex;
