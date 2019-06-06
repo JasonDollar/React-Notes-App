@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import moment from 'moment'
+import toJSON from 'enzyme-to-json'
+import { format } from 'date-fns'
 import {noteWithId} from '../../data/fixtures/notes'
 import NoteListItem from '../../components/NotesList/NotesListItem/NotesListItem'
 
@@ -16,6 +17,9 @@ beforeEach(() => {
 })
 
 describe('NoteListItem component', () => {
+  test('matches snapshot', () => {
+    expect(toJSON(wrapper)).toMatchSnapshot()
+  })
   test('should render proper note title', () => {
     const element = wrapper.find('.header').at(0)
     expect(element.render().text()).toBe(noteWithId.title)
@@ -26,6 +30,6 @@ describe('NoteListItem component', () => {
   })
   test('should render proper time', () => {
     const element = wrapper.find('.time').at(0)
-    expect(element.render().text()).toBe(moment(noteWithId.createdAt).format('LLL'))
+    expect(element.render().text()).toBe(format(noteWithId.createdAt, 'Do MMM YYYY, H:mm'))
   })
 })

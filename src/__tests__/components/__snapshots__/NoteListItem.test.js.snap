@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteListItem component matches snapshot 1`] = `
+<styled.li
+  className="active"
+>
+  <Link
+    to="/notes/view/LEV5BAh2hwb9fh2kFepM"
+  >
+    <h3
+      className="header"
+    >
+      some note
+    </h3>
+    <p
+      className="note"
+    >
+      test
+    </p>
+    <p
+      className="time"
+    >
+      8th May 2019, 12:20
+    </p>
+  </Link>
+</styled.li>
+`;

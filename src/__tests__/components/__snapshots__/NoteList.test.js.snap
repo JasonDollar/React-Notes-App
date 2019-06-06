@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotesList component should match snapshot 1`] = `
+<styled.aside>
+  <NotesMenuActions
+    dropdownValue="createdAsc"
+    setFilter={[Function]}
+    setSortBy={[Function]}
+  />
+  <ul
+    className="list"
+  >
+    <NotesListItem
+      isActive={false}
+      key="4sqNehvqUJO0cy69cDIk"
+      note={
+        Object {
+          "body": "First note body",
+          "createdAt": 1557247578961,
+          "createdBy": "hxwM4zaAB5dmY9ifx6yx32ND5de2",
+          "editedAt": 1557247578961,
+          "id": "4sqNehvqUJO0cy69cDIk",
+          "title": "First note",
+        }
+      }
+    />
+    <NotesListItem
+      isActive={false}
+      key="LEV5BAh2hwb9fh2kFepM2"
+      note={
+        Object {
+          "body": "Second note body",
+          "createdAt": 1557310812414,
+          "createdBy": "hxwM4zaAB5dmY9ifx6yx32ND5de2",
+          "editedAt": 1557310812414,
+          "id": "LEV5BAh2hwb9fh2kFepM2",
+          "title": "Second note",
+        }
+      }
+    />
+  </ul>
+  <div
+    className="paginationButtons"
+  >
+    <styled.button
+      disabled={true}
+      onClick={[Function]}
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="arrow-left"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      Previous
+    </styled.button>
+    <styled.button
+      disabled={true}
+      onClick={[Function]}
+    >
+      Next
+       
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon="arrow-right"
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+    </styled.button>
+  </div>
+</styled.aside>
+`;
