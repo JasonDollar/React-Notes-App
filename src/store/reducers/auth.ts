@@ -1,6 +1,21 @@
 import * as actionTypes from '../actions/actionTypes'
+import { ActionTypes, AuthActions } from '../actions/types'
+import { Error } from '../actions/auth'
 
-export const initialState = {
+interface UserData {
+  firstName?: string,
+  lastName?: string
+}
+
+export interface AuthState {
+  uid: string,
+  error: Error | string,
+  userData: UserData | undefined,
+  firebaseProcessing: boolean,
+  passwordReset: boolean
+}
+
+export const initialState: AuthState = {
   uid: '',
   error: '',
   userData: {},
@@ -8,15 +23,15 @@ export const initialState = {
   passwordReset: false
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: AuthActions): AuthState => {
   switch(action.type) {
-    case actionTypes.AUTH_START: 
+    case ActionTypes.AUTH_START: 
     return {
       ...state,
       error: '',
       firebaseProcessing: true,
     }
-    case actionTypes.AUTH_SUCCESS:
+    case ActionTypes.AUTH_SUCCESS:
     return {
       ...state,
       error: '',
@@ -24,7 +39,7 @@ const authReducer = (state = initialState, action) => {
       passwordReset: false,
     }
     
-    case actionTypes.AUTH_FAILURE:
+    case ActionTypes.AUTH_FAILURE:
     return {
       ...state,
       error: action.payload,
@@ -32,38 +47,38 @@ const authReducer = (state = initialState, action) => {
       userData: {},
       firebaseProcessing: false
     }
-    case actionTypes.GET_USER_UID: 
+    case ActionTypes.GET_USER_UID: 
       return {
         ...state,
         uid: action.payload,
         error: ''
       }
-    case actionTypes.SIGNOUT_SUCCESS: 
+    case ActionTypes.SIGNOUT_SUCCESS: 
       return {
         ...state,
         uid: '',
         error: '',
-        userData: null,
+        userData: {},
         passwordReset: false,
       }
-    case actionTypes.SET_USER_DATA: 
+    case ActionTypes.SET_USER_DATA: 
       return {
         ...state,
         userData: action.payload
       }
-    case actionTypes.SET_USER_DATA_FAILURE: 
+    case ActionTypes.SET_USER_DATA_FAILURE: 
       return {
         ...state,
         userData: {},
         error: action.payload
       }
-    case actionTypes.RESET_SUCCESS: 
+    case ActionTypes.RESET_SUCCESS: 
       return {
         ...state,
         error: '',
         passwordReset: true,
       }
-    case actionTypes.RESET_FAILURE: 
+    case ActionTypes.RESET_FAILURE: 
       return {
         ...state,
         error: action.payload,
