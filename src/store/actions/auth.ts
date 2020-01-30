@@ -1,6 +1,5 @@
-import { Dispatch } from 'redux'
-import * as actionTypes from './actionTypes'
-import {firebase, firestore} from '../../data/firebase'
+import { Dispatch, AnyAction } from 'redux'
+import { firebase, firestore } from '../../data/firebase'
 import { ActionTypes } from './types'
 
 export interface NewUser {
@@ -16,136 +15,136 @@ export interface Error {
 }
 
 
-export interface AuthSuccess {
+export interface AuthSuccessAction {
   type: ActionTypes.AUTH_SUCCESS
 }
 
-export interface ResetSuccess {
+export interface ResetSuccessAction {
   type: ActionTypes.RESET_SUCCESS
 }
 
-export interface ResetFailure {
+export interface ResetFailureAction {
   type: ActionTypes.RESET_FAILURE,
   payload: Error
 }
 
-export interface SignOutSuccess {
+export interface SignOutSuccessAction {
   type: ActionTypes.SIGNOUT_SUCCESS
 }
 
-export interface StartLogin {
+export interface StartLoginAction {
   type: ActionTypes.AUTH_START
 }
 
-export interface GetUserUid {
+export interface GetUserUidAction {
   type: ActionTypes.GET_USER_UID,
   payload: string
 }
 
-export interface SetUser {
+export interface SetUserAction {
   type: ActionTypes.SET_USER_DATA,
   payload: UserData
 }
 
-export interface GetUserDataError {
+export interface GetUserDataErrorAction {
   type: ActionTypes.SET_USER_DATA_FAILURE,
   payload: Error
 }
 
-export interface AuthFailure {
+export interface AuthFailureAction {
   type: ActionTypes.AUTH_FAILURE,
   payload: Error
 }
 
-export const authSuccess = (): AuthSuccess => ({
+export const authSuccess = (): AuthSuccessAction => ({
   type: ActionTypes.AUTH_SUCCESS,
 })
 
-export const authFailure = (err: Error): AuthFailure => ({
+export const authFailure = (err: Error): AuthFailureAction => ({
   type: ActionTypes.AUTH_FAILURE,
   payload: err
 })
 
-export const signOutSuccess = (): SignOutSuccess => ({
+export const signOutSuccess = (): SignOutSuccessAction => ({
   type: ActionTypes.SIGNOUT_SUCCESS
 })
 
-export const getUserUid = (uid: string): GetUserUid => ({
+export const getUserUid = (uid: string): GetUserUidAction => ({
   type: ActionTypes.GET_USER_UID,
   payload: uid
 })
 
-export const setUser = (userData: UserData): SetUser => ({
+export const setUser = (userData: UserData): SetUserAction => ({
   type: ActionTypes.SET_USER_DATA,
   payload: userData
 })
 
-export const getUserDataError = (err: Error): GetUserDataError => ({
+export const getUserDataError = (err: Error): GetUserDataErrorAction => ({
   type: ActionTypes.SET_USER_DATA_FAILURE,
   payload: err
 })
 
-export const startLogin = (): StartLogin => ({
+export const startLogin = (): StartLoginAction => ({
   type: ActionTypes.AUTH_START
 })
 
 export const getUserData = (uid: string) => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch<AnyAction>) => {
     return firestore.collection('users').doc(uid).get()
       .then((res) => {
         if (res.exists) {
           const userData = res.data()
-          return dispatch(setUser(userData))
+          return dispatch<SetUserAction>(setUser(userData))
         }
       })
-      .catch(err => dispatch(getUserDataError(err)))
+      .catch(err => dispatch<GetUserDataErrorAction>(getUserDataError(err)))
   }
 }
 
 
 export const signUp = (newUser: NewUser) => {
   return (dispatch: Dispatch) => {
-    dispatch(startLogin())
+    dispatch<StartLoginAction>(startLogin())
     return firebase.auth().createUserWithEmailAndPassword(
       newUser.email,
       newUser.password
     ).then((res) => {
-      dispatch(getUserUid(res.user!.uid))
+      dispatch<GetUserUidAction>(getUserUid(res.user!.uid))
       return firestore.collection('users').doc(res.user!.uid).set({
         firstName: newUser.firstName,
         lastName: newUser.lastName
       })
     })
-    .then(() =>  dispatch(authSuccess()))
-    .catch(err => dispatch(authFailure(err)))
+    .then(() =>  dispatch<AuthSuccessAction>(authSuccess()))
+    .catch(err => dispatch<AuthFailureAction>(authFailure(err)))
   }
 }
 
 export const signIn = (email: string, password: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(startLogin())
+    dispatch<StartLoginAction>(startLogin())
     return firebase.auth().signInWithEmailAndPassword(
       email,
       password
     ).then(() => {
       const user = firebase.auth().currentUser
-      dispatch(authSuccess())
-      return dispatch(getUserUid(user!.uid))
+      dispatch<AuthSuccessAction>(authSuccess())
+      return dispatch<GetUserUidAction>(getUserUid(user!.uid))
     })
-    .catch(err => dispatch(authFailure(err)))
+    .catch(err => dispatch<AuthFailureAction>(authFailure(err)))
   }
 }
 
 export const signOut = () => {
   return (dispatch: Dispatch) => {
     return firebase.auth().signOut()
-      .then(() => dispatch(signOutSuccess()))
-      .catch(err => dispatch(authFailure(err)))
+      .then(() => dispatch<SignOutSuccessAction>(signOutSuccess()))
+      .catch(err => dispatch<AuthFailureAction>(authFailure(err)))
   }
 }
 
 export const resetPassword = (email: string) => (dispatch: Dispatch) => {
   return firebase.auth().sendPasswordResetEmail(email)
-    .then(() => dispatch({type: ActionTypes.RESET_SUCCESS}))
-    .catch((err) => dispatch({type: ActionTypes.RESET_FAILURE, payload: err}))
+    .then(() => dispatch<ResetSuccessAction>({type: ActionTypes.RESET_SUCCESS}))
+    .catch((err) => dispatch<ResetFailureAction>({type: ActionTypes.RESET_FAILURE, payload: err}))
 }

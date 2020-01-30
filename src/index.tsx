@@ -1,29 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
-
-
-
+import {AnyAction} from 'redux'
 import 'normalize.css'
 import './index.css';
-import {firebase} from './data/firebase'
-import store from './store'
+import { firebase } from './data/firebase'
+import { store } from './store'
 import App from './App';
 import * as actions from './store/actions'
-import {history} from './data/history'
+import { history } from './data/history'
 
-
-
-
-
-let app = (
+const app = (
   <Provider store={store}>
-  <Router history={history}>
-    
+    <Router history={history}>
       <App />
-  </Router>
+    </Router>
   </Provider>
 )
 
@@ -43,12 +35,8 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
     console.log('no user')
     // No user is signed in.
-    store.dispatch(actions.authFailure())
+    store.dispatch(actions.authFailure({message: 'No user'}))
     // store.dispatch(cleanNotes())
   }
 })
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();

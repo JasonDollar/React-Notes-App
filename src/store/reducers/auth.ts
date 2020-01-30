@@ -1,4 +1,3 @@
-import * as actionTypes from '../actions/actionTypes'
 import { ActionTypes, AuthActions } from '../actions/types'
 import { Error } from '../actions/auth'
 
@@ -89,4 +88,4 @@ const authReducer = (state = initialState, action: AuthActions): AuthState => {
   }
 }
 
-export default authReducer
+export { authReducer }

@@ -1,4 +1,3 @@
-import * as actionTypes from '../actions/actionTypes'
 import { ActionTypes, NotesActions } from '../actions/types'
 import { Note } from '../actions/notes'
 
